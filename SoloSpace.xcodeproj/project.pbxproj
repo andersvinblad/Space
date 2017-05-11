@@ -1,0 +1,352 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AEF45F1D1EBD299300C0D62D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF45F1C1EBD299300C0D62D /* AppDelegate.swift */; };
+		AEF45F1F1EBD299300C0D62D /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = AEF45F1E1EBD299300C0D62D /* GameScene.sks */; };
+		AEF45F211EBD299300C0D62D /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = AEF45F201EBD299300C0D62D /* Actions.sks */; };
+		AEF45F231EBD299300C0D62D /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF45F221EBD299300C0D62D /* GameScene.swift */; };
+		AEF45F251EBD299300C0D62D /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF45F241EBD299300C0D62D /* GameViewController.swift */; };
+		AEF45F281EBD299300C0D62D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEF45F261EBD299300C0D62D /* Main.storyboard */; };
+		AEF45F2D1EBD299300C0D62D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEF45F2B1EBD299300C0D62D /* LaunchScreen.storyboard */; };
+		AEF45F351EBD2A0400C0D62D /* Starfield.sks in Resources */ = {isa = PBXBuildFile; fileRef = AEF45F341EBD2A0400C0D62D /* Starfield.sks */; };
+		AEF45F371EBD2A0E00C0D62D /* Explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = AEF45F361EBD2A0E00C0D62D /* Explosion.sks */; };
+		AEF45F391EBD2EDF00C0D62D /* MySnowParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = AEF45F381EBD2EDF00C0D62D /* MySnowParticle.sks */; };
+		AEF45F3B1EBDB84300C0D62D /* torpedo.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AEF45F3A1EBDB84300C0D62D /* torpedo.mp3 */; };
+		AEF45F3D1EBDFECE00C0D62D /* explosion.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AEF45F3C1EBDFECE00C0D62D /* explosion.mp3 */; };
+		AEF45F461EC0B26200C0D62D /* Starfield2.sks in Resources */ = {isa = PBXBuildFile; fileRef = AEF45F451EC0B26200C0D62D /* Starfield2.sks */; };
+		AEF45F721EC2E9E900C0D62D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AEF45F711EC2E9E900C0D62D /* Assets.xcassets */; };
+		AEF45F761EC4345F00C0D62D /* Aliens.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF45F751EC4345F00C0D62D /* Aliens.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		AEF45F191EBD299300C0D62D /* SoloSpace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoloSpace.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AEF45F1C1EBD299300C0D62D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AEF45F1E1EBD299300C0D62D /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		AEF45F201EBD299300C0D62D /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
+		AEF45F221EBD299300C0D62D /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		AEF45F241EBD299300C0D62D /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		AEF45F271EBD299300C0D62D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		AEF45F2C1EBD299300C0D62D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		AEF45F2E1EBD299300C0D62D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AEF45F341EBD2A0400C0D62D /* Starfield.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Starfield.sks; path = "../../../Del2/SpaceGameReloaded-master/SpacegameReloaded/Assets/Starfield.sks"; sourceTree = "<group>"; };
+		AEF45F361EBD2A0E00C0D62D /* Explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Explosion.sks; path = "../../../Del2/SpaceGameReloaded-master/SpacegameReloaded/Assets/Explosion.sks"; sourceTree = "<group>"; };
+		AEF45F381EBD2EDF00C0D62D /* MySnowParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MySnowParticle.sks; sourceTree = "<group>"; };
+		AEF45F3A1EBDB84300C0D62D /* torpedo.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = torpedo.mp3; sourceTree = "<group>"; };
+		AEF45F3C1EBDFECE00C0D62D /* explosion.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = explosion.mp3; sourceTree = "<group>"; };
+		AEF45F451EC0B26200C0D62D /* Starfield2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Starfield2.sks; path = "../../../Del2/SpaceGameReloaded-master/SpacegameReloaded/Assets/Starfield2.sks"; sourceTree = "<group>"; };
+		AEF45F711EC2E9E900C0D62D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AEF45F751EC4345F00C0D62D /* Aliens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aliens.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AEF45F161EBD299300C0D62D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AEF45F101EBD299300C0D62D = {
+			isa = PBXGroup;
+			children = (
+				AEF45F1B1EBD299300C0D62D /* SoloSpace */,
+				AEF45F1A1EBD299300C0D62D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AEF45F1A1EBD299300C0D62D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AEF45F191EBD299300C0D62D /* SoloSpace.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AEF45F1B1EBD299300C0D62D /* SoloSpace */ = {
+			isa = PBXGroup;
+			children = (
+				AEF45F711EC2E9E900C0D62D /* Assets.xcassets */,
+				AEF45F751EC4345F00C0D62D /* Aliens.swift */,
+				AEF45F1E1EBD299300C0D62D /* GameScene.sks */,
+				AEF45F221EBD299300C0D62D /* GameScene.swift */,
+				AEF45F241EBD299300C0D62D /* GameViewController.swift */,
+				AEF45F261EBD299300C0D62D /* Main.storyboard */,
+				AEF45F2B1EBD299300C0D62D /* LaunchScreen.storyboard */,
+				AEF45F1C1EBD299300C0D62D /* AppDelegate.swift */,
+				AEF45F201EBD299300C0D62D /* Actions.sks */,
+				AEF45F3C1EBDFECE00C0D62D /* explosion.mp3 */,
+				AEF45F361EBD2A0E00C0D62D /* Explosion.sks */,
+				AEF45F3A1EBDB84300C0D62D /* torpedo.mp3 */,
+				AEF45F341EBD2A0400C0D62D /* Starfield.sks */,
+				AEF45F451EC0B26200C0D62D /* Starfield2.sks */,
+				AEF45F381EBD2EDF00C0D62D /* MySnowParticle.sks */,
+				AEF45F2E1EBD299300C0D62D /* Info.plist */,
+			);
+			path = SoloSpace;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AEF45F181EBD299300C0D62D /* SoloSpace */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AEF45F311EBD299300C0D62D /* Build configuration list for PBXNativeTarget "SoloSpace" */;
+			buildPhases = (
+				AEF45F151EBD299300C0D62D /* Sources */,
+				AEF45F161EBD299300C0D62D /* Frameworks */,
+				AEF45F171EBD299300C0D62D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SoloSpace;
+			productName = SoloSpace;
+			productReference = AEF45F191EBD299300C0D62D /* SoloSpace.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AEF45F111EBD299300C0D62D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = "Anders Vinblad";
+				TargetAttributes = {
+					AEF45F181EBD299300C0D62D = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = YXVAR6P95T;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = AEF45F141EBD299300C0D62D /* Build configuration list for PBXProject "SoloSpace" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AEF45F101EBD299300C0D62D;
+			productRefGroup = AEF45F1A1EBD299300C0D62D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AEF45F181EBD299300C0D62D /* SoloSpace */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AEF45F171EBD299300C0D62D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AEF45F351EBD2A0400C0D62D /* Starfield.sks in Resources */,
+				AEF45F281EBD299300C0D62D /* Main.storyboard in Resources */,
+				AEF45F721EC2E9E900C0D62D /* Assets.xcassets in Resources */,
+				AEF45F391EBD2EDF00C0D62D /* MySnowParticle.sks in Resources */,
+				AEF45F1F1EBD299300C0D62D /* GameScene.sks in Resources */,
+				AEF45F3D1EBDFECE00C0D62D /* explosion.mp3 in Resources */,
+				AEF45F2D1EBD299300C0D62D /* LaunchScreen.storyboard in Resources */,
+				AEF45F461EC0B26200C0D62D /* Starfield2.sks in Resources */,
+				AEF45F371EBD2A0E00C0D62D /* Explosion.sks in Resources */,
+				AEF45F3B1EBDB84300C0D62D /* torpedo.mp3 in Resources */,
+				AEF45F211EBD299300C0D62D /* Actions.sks in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AEF45F151EBD299300C0D62D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AEF45F761EC4345F00C0D62D /* Aliens.swift in Sources */,
+				AEF45F231EBD299300C0D62D /* GameScene.swift in Sources */,
+				AEF45F251EBD299300C0D62D /* GameViewController.swift in Sources */,
+				AEF45F1D1EBD299300C0D62D /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		AEF45F261EBD299300C0D62D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AEF45F271EBD299300C0D62D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		AEF45F2B1EBD299300C0D62D /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AEF45F2C1EBD299300C0D62D /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		AEF45F2F1EBD299300C0D62D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		AEF45F301EBD299300C0D62D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AEF45F321EBD299300C0D62D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = YXVAR6P95T;
+				INFOPLIST_FILE = SoloSpace/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = AV.SoloSpace;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		AEF45F331EBD299300C0D62D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = YXVAR6P95T;
+				INFOPLIST_FILE = SoloSpace/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = AV.SoloSpace;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AEF45F141EBD299300C0D62D /* Build configuration list for PBXProject "SoloSpace" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AEF45F2F1EBD299300C0D62D /* Debug */,
+				AEF45F301EBD299300C0D62D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AEF45F311EBD299300C0D62D /* Build configuration list for PBXNativeTarget "SoloSpace" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AEF45F321EBD299300C0D62D /* Debug */,
+				AEF45F331EBD299300C0D62D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AEF45F111EBD299300C0D62D /* Project object */;
+}
