@@ -22,7 +22,7 @@ class Aliens: SKSpriteNode {
     init(normalAlien:String){
         //textures
         stringName = "normalAlien"
-        var possibleAliens = ["alien", "alien2", "alien3"]
+        var possibleAliens = ["alienCircle", "hex", "shooterAlien", "starAlien"]
         possibleAliens = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: possibleAliens) as! [String]
         let alien = SKSpriteNode(imageNamed: possibleAliens[0])
         let texture = SKTexture(imageNamed: possibleAliens[0])

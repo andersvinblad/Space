@@ -11,6 +11,7 @@ import GameplayKit
 import CoreMotion
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
+    var weaponButton:SKSpriteNode!
     let displaySize: CGRect = UIScreen.main.bounds
     var displayWidth: CGFloat = 0.0
     var displayHeight: CGFloat = 0.0
@@ -19,7 +20,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var starField:SKEmitterNode!
     var starField2:SKEmitterNode!
     var player:SKSpriteNode!
+    var thruster:SKEmitterNode!
     var spaceship:SKSpriteNode!
+    var currentWeapon:String!
     var scoreLabel:SKLabelNode!
     var score:Int = 0 {
         didSet {
@@ -76,14 +79,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         player.physicsBody?.isDynamic
         //self.addChild(player)
+        //PLAYER
         
-        spaceship = SKSpriteNode(imageNamed: "shuttle")
-        spaceship.position = CGPoint(x: 0, y: (-self.displayHeight + 50))
+        
+        spaceship = SKSpriteNode(imageNamed: "playerTestSprite")
+        spaceship.position = CGPoint(x: 0, y: (-self.displayHeight + 300))
         //spaceship.size = player.size
         spaceship.physicsBody?.isDynamic
         self.addChild(spaceship)
         
+        thruster = SKEmitterNode(fileNamed: "Thruster")
+        thruster.position = CGPoint(x: spaceship.position.x, y: spaceship.position.y - 40)
+        self.addChild(thruster)
+        
+        //WEAPON
+        currentWeapon = "laser"
+        
         ///
+        // SUPER WEAPON BUTTON
+        weaponButton = SKSpriteNode(color: UIColor.red, size: CGSize(width: self.displayWidth/4, height: self.displayWidth/4))
+        weaponButton.position = CGPoint(x: -self.displayWidth + 50, y: self.displayHeight - 50)
+        self.addChild(weaponButton)
         
         ///
         print("MAKE THE SCORE LABEL")
@@ -96,7 +112,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         score = 0
         
         bottomArea = SKSpriteNode(color: UIColor.red, size: CGSize(width: self.frame.width, height: 10))
-        bottomArea.position = CGPoint(x: 0, y: -self.displayHeight + 10)
+        bottomArea.position = CGPoint(x: 0, y: -self.displayHeight + 100)
         bottomArea.physicsBody = SKPhysicsBody(rectangleOf: bottomArea.size)
         bottomArea.physicsBody?.isDynamic = true
         bottomArea.physicsBody?.categoryBitMask = bottomAreaCategory
@@ -122,9 +138,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
      //   gameTimer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(addBigAlien), userInfo: nil, repeats: true)
         
-        gameTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(addAlien), userInfo: nil, repeats: true)
+        gameTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(addAlien), userInfo: nil, repeats: true)
         
-        gameTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(fireTorpedo), userInfo: nil, repeats: true)
+        gameTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(fireTorpedo), userInfo: nil, repeats: true)
 
         //gameTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(fireTorpedo), userInfo: nil, repeats: true)
 
@@ -151,48 +167,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.addChild(alien)
         
-        let animationDuration:TimeInterval = 15
+        let animationDuration:TimeInterval = 20
         
         var actionArray = [SKAction]()
-        
-        
         actionArray.append(SKAction.move(to: CGPoint(x: position, y: -self.frame.height/2), duration: animationDuration))
         actionArray.append(SKAction.removeFromParent())
         
         alien.run(SKAction.sequence(actionArray))
-        
-        /*
-        possibleAliens = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: possibleAliens) as! [String]
-        //let alien = SKSpriteNode(imageNamed: possibleAliens[0])
-        //
-        let alien = SKSpriteNode(imageNamed: "NewAlienx3")
-
-        
-        let randomAlienPosition = GKRandomDistribution(lowestValue: (Int(-self.frame.width/2) + 50), highestValue: Int( self.frame.width/2) - 50)
-        let position = CGFloat(randomAlienPosition.nextInt())
-        
-        alien.position = CGPoint(x: position, y: self.frame.size.height + alien.size.height)
-        
-        alien.physicsBody = SKPhysicsBody(rectangleOf: alien.size)
-        alien.physicsBody?.isDynamic = true
-        
-        alien.physicsBody?.categoryBitMask = alienCategory
-        alien.physicsBody?.contactTestBitMask = photonTorpedoCategory
-        alien.physicsBody?.collisionBitMask = 0
-        
-        self.addChild(alien)
-        
-        let animationDuration:TimeInterval = 15
-        
-        var actionArray = [SKAction]()
-        
-        
-        actionArray.append(SKAction.move(to: CGPoint(x: position, y: -self.frame.height/2), duration: animationDuration))
-        actionArray.append(SKAction.removeFromParent())
-        
-        alien.run(SKAction.sequence(actionArray))
-        //addAlien()
-        */
     }
     
     func addBigAlien(){
@@ -226,14 +207,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     func fireTorpedo(){
-     //   self.run(SKAction.playSoundFileNamed("torpedo.mp3", waitForCompletion: false))
-        let torpedoNode = SKSpriteNode(imageNamed: "torpedo")
+       // self.run(SKAction.playSoundFileNamed("torpedo.mp3", waitForCompletion: false))
+        let torpedoNode = Torpedo(weaponType: currentWeapon)
         
         
-        torpedoNode.position = spaceship.position
+        torpedoNode.position = CGPoint(x: spaceship.position.x, y: spaceship.position.y + 40)
         torpedoNode.position.y += 5
         
-        torpedoNode.physicsBody = SKPhysicsBody(circleOfRadius: torpedoNode.size.width/2)
+        torpedoNode.physicsBody = SKPhysicsBody(circleOfRadius: 50)
         torpedoNode.physicsBody?.isDynamic = true
         torpedoNode.physicsBody?.categoryBitMask = photonTorpedoCategory
         torpedoNode.physicsBody?.contactTestBitMask = alienCategory
@@ -274,7 +255,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if ((firstBody.categoryBitMask & photonTorpedoCategory) != 0) && ((secondBody.categoryBitMask & alienCategory) != 0 ){
             if ((firstBody.node != nil) && (secondBody.node != nil )){
                 
-            torpedoDidColideWithAlien(torpedoNode: firstBody.node as! SKSpriteNode, alienNode: secondBody.node as! Aliens)
+            torpedoDidColideWithAlien(torpedoNode: firstBody.node as! Torpedo, alienNode: secondBody.node as! Aliens)
                 
             }else{
                 print("RIP, bodyNode = nil")
@@ -294,25 +275,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         loseLabel.fontColor = UIColor.black
         loseLabel.fontName = "AmericanTypewriter-Bold"
         loseLabel.zPosition = 3
-        self.addChild(loseLabel)
         
         var stopNode = SKSpriteNode()
         stopNode = SKSpriteNode(color: UIColor.red, size: self.frame.size)
         stopNode.position = CGPoint(x: 0, y: 0)
         stopNode.zPosition = 2
-        self.addChild(stopNode)
+       
         
-        scoreLabel.position = CGPoint(x: 0, y: 200)
-        scoreLabel.zPosition = 3
-        scoreLabel.fontSize = 70
+        let  scoreLabel1 = SKLabelNode(text: "Score: " + String(score))
+        scoreLabel1.position = CGPoint(x:0, y: 150)
+        scoreLabel1.fontName = "AmericanTypewriter-Bold"
+        scoreLabel1.fontSize = 60
+        scoreLabel1.fontColor = UIColor.white
+        scoreLabel1.zPosition = 3
+        
+        self.removeAllChildren()
+        self.addChild(loseLabel)
+        self.addChild(stopNode)
+        self.addChild(scoreLabel1)
+        
         self.run(SKAction.wait(forDuration: 6)){
+            self.removeAllChildren()
             self.startGame()
         }
     }
     
-    func torpedoDidColideWithAlien(torpedoNode:SKSpriteNode, alienNode:Aliens){
+    func torpedoDidColideWithAlien(torpedoNode:Torpedo, alienNode:Aliens){
         let pointSize = CGSize(width: 50, height: 50)
-        let explosion = SKEmitterNode(fileNamed: "Explosion")
         let extraPoints = SKSpriteNode(imageNamed: "+5Px3")
         extraPoints.position = alienNode.position
         extraPoints.size = pointSize
@@ -323,48 +312,45 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         extraPoints.run(SKAction.scale(by: 2, duration: 0.3))
         extraPoints.run(SKAction.moveBy(x: 50, y: 50, duration: 1.5))
         alienNode.hp? -= 1
-        
+        torpedoNode.hp? -= 1
         if((alienNode.hp)! <= 0){
-                explosion?.position = alienNode.position
-                addChild(explosion!)
-                torpedoNode.removeFromParent()
-            if (alienNode.stringName == "normalAlienAlien"){
+            
+               // addChild(explosion!)
+            if (alienNode.stringName == "normalAlien"){
                 addAlien()
             }
             else if (alienNode.stringName == "bigAlien"){
-                addBigAlien()
+                let explosion = SKEmitterNode(fileNamed: "Explosion")
+                explosion?.position = alienNode.position
+                self.addChild(explosion!)
+                self.run(SKAction.playSoundFileNamed("explosion.mp3", waitForCompletion: false))
+                self.run(SKAction.wait(forDuration: 1.5)){
+                    explosion?.removeFromParent()
+                    self.addBigAlien()
+                }
+            }
+            
+            let explosion = SKEmitterNode(fileNamed: "Explosion")
+            explosion?.position = alienNode.position
+            self.addChild(explosion!)
+           // self.run(SKAction.playSoundFileNamed("explosion.mp3", waitForCompletion: false))
+            self.run(SKAction.wait(forDuration: 0.5)){
+                explosion?.removeFromParent()
             }
                 alienNode.removeFromParent()
                 self.score = self.score + 5
                 self.scoreLabel.text = "Score: " + String(score)
                 scoreLabel.position = CGPoint(x:-self.frame.width/2 + 100, y: self.frame.height/2 - 60)
-            if (alienNode.stringName == "bigAlien"){
-              //  self.run(SKAction.playSoundFileNamed("explosion.mp3", waitForCompletion: false))
-
-            }
-                self.run(SKAction.wait(forDuration: 1.5)){
-                explosion?.removeFromParent()
-                }
+            
+            
         }
         
-            else{
-            explosion?.position = CGPoint(x: alienNode.position.x, y: (alienNode.position.y - 100))
-            addChild(explosion!)
+        if(torpedoNode.hp! <= 0){
             torpedoNode.removeFromParent()
-            self.score = self.score + 5
-            self.scoreLabel.text = "Score: " + String(score)
-            scoreLabel.position = CGPoint(x:-self.frame.width/2 + 100, y: self.frame.height/2 - 60)
-         //   self.run(SKAction.playSoundFileNamed("explosion.mp3", waitForCompletion: false))
-            self.run(SKAction.wait(forDuration: 1.5)){
-                explosion?.removeFromParent()
-            }
         }
-    
-    
-            // ADD ALIEN
-           // self.addAlien()
+            else{
+        }
         
-        print(alienNode.hp)
         self.run(SKAction.wait(forDuration: 1)){
             extraPoints.removeFromParent()
         }
@@ -376,11 +362,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func touchDown(atPoint pos : CGPoint) {
+        if (self.weaponButton.contains(pos)){
+            currentWeapon = "bigLaser"
+
+            self.run(SKAction.wait(forDuration: 6)){
+                self.currentWeapon = "laser"
+            }
+            
+        }
     }
     
     func touchMoved(toPoint pos : CGPoint) {
-        spaceship.run(SKAction.move(to: CGPoint(x: pos.x, y: -self.displayHeight + 50), duration: 0))
-        //fireTorpedo()
+        spaceship.run(SKAction.move(to: CGPoint(x: pos.x, y: -self.displayHeight + 170), duration: 0))
+        thruster.position = CGPoint(x: spaceship.position.x - 10, y: spaceship.position.y - 50)
         //spaceship.run(SKAction.moveTo(x: pos.x, duration: 0.2))
     }
     
@@ -390,7 +384,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches{
-       // self.touchUp(atPoint:t.location(in: self))
+        self.touchDown(atPoint:t.location(in: self))
         }
     }
     
