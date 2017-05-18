@@ -13,13 +13,17 @@ class StartScene: SKScene {
     
     var entities = [GKEntity]()
     var graphs = [String : GKGraph]()
-    
+    var button : SKSpriteNode!
     private var lastUpdateTime : TimeInterval = 0
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
     
     override func sceneDidLoad() {
- print("Scene Did Load")
+        button = SKSpriteNode(imageNamed: "BigB")
+        self.button.position = CGPoint(x: 0, y: 0)
+        self.button.zPosition = 1
+        self.addChild(button)
+        print("StartScene Did Load")
         self.lastUpdateTime = 0
         
         // Get label node from scene and store it for use later
@@ -45,11 +49,36 @@ class StartScene: SKScene {
     
     
     func touchDown(atPoint pos : CGPoint) {
+        if (button.contains(pos)){
+            if let scene = GKScene(fileNamed: "GameScene") {
+                
+                // Get the SKScene from the loaded GKScene
+                if let sceneNode = scene.rootNode as! GameScene? {
+                    
+                    // Copy gameplay related content over to the scene
+                    
+                    // Set the scale mode to scale to fit the window
+                    sceneNode.scaleMode = .aspectFill
+                    sceneNode.difficulty = 2
+                    // Present the scene
+                    if let view = self.view as! SKView? {
+                        view.presentScene(sceneNode)
+                        
+                        view.ignoresSiblingOrder = true
+                        
+                        view.showsFPS = true
+                        view.showsNodeCount = true
+                    }
+                }
+            }
+        }
         if let n = self.spinnyNode?.copy() as! SKShapeNode? {
             n.position = pos
             n.strokeColor = SKColor.green
             self.addChild(n)
+            
         }
+        
     }
     
     func touchMoved(toPoint pos : CGPoint) {
