@@ -14,13 +14,16 @@ class Player: SKSpriteNode {
     var stringName:String?
     var hp:Int?
     var nrOfBombs = 3
-    var imageName = "playerTestSprite"
+    var imageName = "pixelShip"
     var currentWeapon = "laser"
+
+
     
     
     
-    init(playerImageName:String){
+    init(playerImageName:String, weaponName: String){
         //textures
+        
         stringName = playerImageName
         let texture = SKTexture(imageNamed: playerImageName)
         super.init(texture:texture, color: SKColor.clear, size: texture.size())

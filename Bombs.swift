@@ -13,12 +13,13 @@ import SpriteKit
 import GameplayKit
 
 class Bomb: SKSpriteNode {
+    
     var stringName:String?
     var imageName = "playerTestSprite" // pickUpSprite needed
-    init(){
+    init(type: String){
         //textures
-        stringName = imageName
-        let texture = SKTexture(imageNamed: imageName)
+        var texture = SKTexture(imageNamed: type)
+        stringName = type
         super.init(texture:texture, color: SKColor.clear, size: texture.size())
         //MISC
     }
@@ -26,4 +27,5 @@ class Bomb: SKSpriteNode {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
 }

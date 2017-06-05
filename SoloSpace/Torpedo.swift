@@ -21,6 +21,7 @@ class Torpedo: SKSpriteNode {
     
     init(weaponType:String){
         //textures
+        hp = 1
         if (weaponType == "laser"){
             hp = 1
         }
