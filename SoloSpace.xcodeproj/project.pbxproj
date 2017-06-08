@@ -118,7 +118,7 @@
 			name = Pickups/items;
 			sourceTree = "<group>";
 		};
-		AE92C7DC1ECD6E870062330C /* Player / Aliens */ = {
+		AE92C7DC1ECD6E870062330C /* Player / Aliens / GameData */ = {
 			isa = PBXGroup;
 			children = (
 				AEF45F751EC4345F00C0D62D /* Aliens.swift */,
@@ -127,7 +127,7 @@
 				AE92C7AF1EC8574F0062330C /* Torpedo.swift */,
 				AEB367951ED2D3A6004BA9D1 /* GameData.swift */,
 			);
-			name = "Player / Aliens";
+			name = "Player / Aliens / GameData";
 			sourceTree = "<group>";
 		};
 		AEC297731EE54232004E7D47 /* Never pressed */ = {
@@ -147,7 +147,7 @@
 		AEF45F101EBD299300C0D62D = {
 			isa = PBXGroup;
 			children = (
-				AE92C7DC1ECD6E870062330C /* Player / Aliens */,
+				AE92C7DC1ECD6E870062330C /* Player / Aliens / GameData */,
 				AEF45F1B1EBD299300C0D62D /* SoloSpace */,
 				AE92C7DB1ECD6E620062330C /* Pickups/items */,
 				AE92C7B71EC995170062330C /* Assets and Effects */,

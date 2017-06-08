@@ -13,7 +13,7 @@ import GameplayKit
 class Aliens: SKSpriteNode {
     var stringName:String?
     var hp:Int?
-    var intSpeed = 10
+    //var intSpeed = 10
     var imageName:String?
     var actionArray = [SKAction]()
 
@@ -28,7 +28,7 @@ class Aliens: SKSpriteNode {
         let texture = SKTexture(imageNamed: possibleAliens[0])
         super.init(texture:texture, color: SKColor.clear, size: texture.size())
         //MISC
-        hp = 10
+        hp = 1
 
     }
     

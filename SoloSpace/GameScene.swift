@@ -12,10 +12,9 @@ import CoreData
 import CoreMotion
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
+
     var progressBarFrame : SKShapeNode!
     var progressBar : SKSpriteNode!
-    //
-    
     var gameData = GameData.shared
     var difficulty = 1
     var lives = 3
@@ -69,8 +68,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             startGame(attackRate: gameData.attackRate)
         }
     }
-    func loadShopping()
-    {
+    func loadShopping(){
         
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate
             else {
@@ -127,10 +125,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
     }
-    
-    
-    
-    
     func startGame(attackRate: Double){
 
         self.alienQueue = 30
@@ -228,7 +222,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(addPickUp), userInfo: nil, repeats: true)
 
         //gameTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(fireTorpedo), userInfo: nil, repeats: true)
-
+        
+        
         
         self.progressBar = SKSpriteNode(color: UIColor.yellow, size: CGSize(width: 1, height: 20))
         self.progressBar.position = CGPoint(x: 0, y: self.frame.height/2 - 50)
@@ -245,8 +240,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
 
     }
-    
-    
     func progress(){
         if (progressBar.size.width <= progressBarFrame.frame.width){
             self.progressBar.size.width += 3
@@ -254,13 +247,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         else {
             boostWeapon()
             progressBar.size.width = 1
+            self.run(SKAction.playSoundFileNamed("pow", waitForCompletion: false))
         }
         
         
     }
-    
-    
-    
     func setupPlayer(){
         spaceship = Player(playerImageName: gameData.shipName, weaponName: gameData.currentWeapon)
         spaceship.position = CGPoint(x: 0, y: (-self.displayHeight + 200))
@@ -293,14 +284,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
     }
-    
-    
-    
     func fireBomb(){
         spaceship.nrOfBombs -= 1
         let bomb = SKEmitterNode(fileNamed: "BombExplosion")
         bomb?.position = CGPoint(x: 0, y: 0)
         self.addChild(bomb!)
+        self.run(SKAction.playSoundFileNamed("exp.wav", waitForCompletion: true))
         self.run(SKAction.wait(forDuration: 2.0)){
             bomb?.removeFromParent()
         }
@@ -322,12 +311,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
            bombHitBox.removeFromParent()
         }
     }
-    
     func addAlien(){
         if (alienQueue >= 1 && currentNrOfAliens <= (5 * self.gameData.difficulty)){
         self.alienQueue -= 1
 
         self.currentNrOfAliens += 1
+            
         let alien = Aliens.init(normalAlien: "alien")
         let randomAlienPosition = GKRandomDistribution(lowestValue: (Int(-self.frame.width/2) + 50), highestValue: Int( self.frame.width/2) - 50)
         let position = CGFloat(randomAlienPosition.nextInt())
@@ -344,6 +333,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(alien)
         
         alien.physicsBody?.applyImpulse(CGVector(dx: 0, dy: -100))
+            
+            
             self.run(SKAction.wait(forDuration: 10)){
                 if (alien.hp!>=1){
                     self.removeAliens(Alien: alien)
@@ -359,7 +350,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
 
     }
-    
     func addBigAlien(){
         if (alienQueue >= 1){
         alienQueue -= 1
@@ -431,9 +421,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             pickUp.run(SKAction.sequence(actionArray))
         
     }
-
-    
-    
     func fireTorpedo(){
         self.run(SKAction.playSoundFileNamed("pew.wav", waitForCompletion: true))
         let torpedoNode = Torpedo(weaponType: currentWeapon)
@@ -480,11 +467,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         torpedoNode2.run(SKAction.sequence(animationArray))
         
         
-    }
-    
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?){
-        //fireTorpedo()
     }
     
     
@@ -555,6 +537,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
 
     }
+    
     func loseScreen(){
         let loseLabel = SKLabelNode()
         loseLabel.text = "YOU LOSE"
@@ -681,8 +664,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             winScreen()
         }
     }
-    
-    
     func torpedoDidColideWithPickup(torpedoNode:Torpedo, pickUpNode:Bomb){
         pickUpNode.removeFromParent()
         torpedoNode.removeFromParent()
@@ -720,8 +701,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
     }
-    
-    
     
     func winScreen(){
         let winLabel = SKLabelNode()
@@ -780,8 +759,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    
-    
     func touchDown(atPoint pos : CGPoint) {
         if (self.weaponButton.contains(pos)){
             
@@ -804,36 +781,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.removeFromParent()
         }
     }
-    
     func touchMoved(toPoint pos : CGPoint) {
         spaceship.run(SKAction.move(to: CGPoint(x: pos.x, y: -self.frame.height/2 + 300), duration: 0))
        // thruster.position = CGPoint(x: spaceship.position.x - 10, y: spaceship.position.y - 50)
         //spaceship.run(SKAction.moveTo(x: pos.x, duration: 0.2))
     }
-    
     func touchUp(atPoint pos : CGPoint) {
 
     }
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches{
         self.touchDown(atPoint:t.location(in: self))
         }
     }
-    
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches {
             self.touchMoved(toPoint: t.location(in: self))
         }
 
     }
-    
-    
-    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?){
+        //fireTorpedo()
+    }
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
     }
-    
-    
     override func update(_ currentTime: TimeInterval) {
     }
     
@@ -844,7 +815,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         print("Music!")
     }
     func removeAliens(Alien : SKSpriteNode){
-        //self.alienQueue -= 1
         self.currentNrOfAliens -= 1
         Alien.run(SKAction.removeFromParent())
         
@@ -854,7 +824,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.removeAllChildren()
         
     }
-    
     func quit(){
         
     }

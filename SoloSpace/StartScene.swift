@@ -64,15 +64,7 @@ class StartScene: SKScene {
         }
     }
     
-    func touchDown(atPoint pos : CGPoint) {
-        
-        
-        
-        
-        
-        
-        
-    }
+    
     
     func loadShopping(){
         
@@ -131,8 +123,6 @@ class StartScene: SKScene {
         }
         
     }
-
-    
     
     func startMenu(){
         var CD = ShopThing()
@@ -188,6 +178,7 @@ class StartScene: SKScene {
         
         
     }
+    
     func levelSelect(){
         self.removeChildren(in: menuItems)
         self.highScoreLabel.removeFromParent()
@@ -247,61 +238,6 @@ class StartScene: SKScene {
         
     }
     
-    
-    
-    func touchMoved(toPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.blue
-            self.addChild(n)
-        }
-    }
-    
-    func touchUp(atPoint pos : CGPoint) {
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.red
-            self.addChild(n)
-        }
-        
-        if (self.newGameButton.contains(pos)){
-           startGame()
-            
-        }
-        if (self.levelSelectButton.contains(pos)){
-            levelSelect()
-            
-        }
-        if (self.loadoutButton.contains(pos)){
-            loadoutMenu()
-        }
-        if level.count >= 1 {
-            for levels in 0...level.count-1{
-                if (level[levels].contains(pos)){
-                    gameData.difficulty = (levels + 1) * 2
-                    startGame()
-                }
-            }
-        }
-        if loadoutMenuItems.count >= 1 {
-            for levels in 0...loadoutMenuItems.count-1{
-                if (loadoutMenuItems[levels].contains(pos)){
-                    gameData.shipName = "ship" + String(levels + 1)
-                    startMenu()
-                    self.removeChildren(in: loadoutMenuItems)
-                }
-            }
-        }
-        
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.green
-            self.addChild(n)
-            
-        }
-        
-    }
-    
     func startGame(){
         self.removeAllChildren()
         if let scene = GKScene(fileNamed: "GameScene") {
@@ -327,6 +263,78 @@ class StartScene: SKScene {
         }
     }
     
+    
+    
+    func touchMoved(toPoint pos : CGPoint) {
+        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
+            n.position = pos
+            n.strokeColor = SKColor.blue
+            self.addChild(n)
+        }
+    }
+    func touchDown(atPoint pos : CGPoint) {
+        
+        
+        
+        
+        
+        
+        
+    }
+    func touchUp(atPoint pos : CGPoint) {
+        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
+            n.position = pos
+            n.strokeColor = SKColor.red
+            self.addChild(n)
+        }
+        
+        if (self.newGameButton.contains(pos)){
+            self.run(SKAction.playSoundFileNamed("select.wav", waitForCompletion: true))
+            
+            startGame()
+            
+        }
+        if (self.levelSelectButton.contains(pos)){
+            self.run(SKAction.playSoundFileNamed("select.wav", waitForCompletion: true))
+            
+            levelSelect()
+            
+            
+        }
+        if (self.loadoutButton.contains(pos)){
+            loadoutMenu()
+            self.run(SKAction.playSoundFileNamed("select.wav", waitForCompletion: true))
+            
+        }
+        if level.count >= 1 {
+            for levels in 0...level.count-1{
+                if (level[levels].contains(pos)){
+                    gameData.difficulty = (levels + 1) * 2
+                    startGame()
+                }
+            }
+        }
+        if loadoutMenuItems.count >= 1 {
+            for levels in 0...loadoutMenuItems.count-1{
+                if (loadoutMenuItems[levels].contains(pos)){
+                    gameData.shipName = "ship" + String(levels + 1)
+                    self.run(SKAction.playSoundFileNamed("select", waitForCompletion: false))
+                    self.run(SKAction.wait(forDuration: 0.2)){
+                        self.startMenu()
+                    }
+                    self.removeChildren(in: loadoutMenuItems)
+                }
+            }
+        }
+        
+        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
+            n.position = pos
+            n.strokeColor = SKColor.green
+            self.addChild(n)
+            
+        }
+        
+    }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let label = self.label {
             label.run(SKAction.init(named: "Pulse")!, withKey: "fadeInOut")
@@ -334,20 +342,16 @@ class StartScene: SKScene {
         
         for t in touches { self.touchDown(atPoint: t.location(in: self)) }
     }
-    
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches { self.touchMoved(toPoint: t.location(in: self)) }
+        self.run(SKAction.moveBy(x: 100, y: 0, duration: 1))
     }
-    
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches { self.touchUp(atPoint: t.location(in: self)) }
     }
-    
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches { self.touchUp(atPoint: t.location(in: self)) }
     }
-    
-    
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
         

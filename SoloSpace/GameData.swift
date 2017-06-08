@@ -13,12 +13,53 @@ import UIKit
 class GameData {
     static let shared = GameData()
     var score = 0
-    var difficulty = 1
-    var attackRate = 0.2
+    var difficulty = 100
+    var attackRate = 0.01
     var currentWeapon = "wep2"
     var shipName = "ship1"
 
     //private init() { }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
