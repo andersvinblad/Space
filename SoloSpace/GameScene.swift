@@ -13,6 +13,8 @@ import CoreMotion
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
 
+    var alienHit = false
+    var addAlienTimer : Timer!
     var progressBarFrame : SKShapeNode!
     var progressBar : SKSpriteNode!
     var gameData = GameData.shared
@@ -68,66 +70,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             startGame(attackRate: gameData.attackRate)
         }
     }
-    func loadShopping(){
-        
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate
-            else {
-                return
-        }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
-        
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "GameData")
-        
-        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
-        let sortDescriptors = [sortDescriptor]
-        fetchRequest.sortDescriptors = sortDescriptors
-        
-        let resultPredicate = NSPredicate(format: "bought = false")
-        fetchRequest.predicate = resultPredicate
-        
-        do {
-            var shoplistCD : [NSManagedObject] = try managedContext.fetch(fetchRequest)
-            
-            for CDObject in shoplistCD
-            {
-                let nShopThing = ShopThing()
-                
-                nShopThing.loadFromCD(data: CDObject)
-                
-            }
-            
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
-        }
-        
-        
-        let fetchRequestBought = NSFetchRequest<NSManagedObject>(entityName: "Shopitem")
-        
-        fetchRequestBought.sortDescriptors = sortDescriptors
-        
-        let resultPredicateBought = NSPredicate(format: "bought = true")
-        fetchRequestBought.predicate = resultPredicateBought
-        
-        do {
-            var shoplistBoughtCD : [NSManagedObject] = try managedContext.fetch(fetchRequestBought)
-            
-            for CDObject in shoplistBoughtCD
-            {
-                let nShopThing = ShopThing()
-                
-                nShopThing.loadFromCD(data: CDObject)
-                
-            }
-            
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
-        }
-        
-    }
     func startGame(attackRate: Double){
 
-        self.alienQueue = 30
+        self.alienQueue = 5
         var difficulty = gameData.difficulty
         startMusic()
         if difficulty == nil{
@@ -215,7 +160,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         gameTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(addBigAlien), userInfo: nil, repeats: true)
         
-        gameTimer = Timer.scheduledTimer(timeInterval: (TimeInterval(10.0 / Double(gameData.difficulty * 5))), target: self, selector: #selector(addAlien), userInfo: nil, repeats: true)
+        self.run(SKAction.wait(forDuration: 5)){
+            self.addAlienTimer = Timer.scheduledTimer(timeInterval: (TimeInterval(10.0 / Double(self.gameData.difficulty * 5))), target: self, selector: #selector(self.addAlien), userInfo: nil, repeats: true)
+            
+        }
         
         gameTimer = Timer.scheduledTimer(timeInterval: gameData.attackRate, target: self, selector: #selector(fireTorpedo), userInfo: nil, repeats: true)
 
@@ -253,6 +201,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     func setupPlayer(){
+        alienHit = false
         spaceship = Player(playerImageName: gameData.shipName, weaponName: gameData.currentWeapon)
         spaceship.position = CGPoint(x: 0, y: (-self.displayHeight + 200))
         //spaceship.size = player.size
@@ -314,7 +263,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func addAlien(){
         if (alienQueue >= 1 && currentNrOfAliens <= (5 * self.gameData.difficulty)){
         self.alienQueue -= 1
-
         self.currentNrOfAliens += 1
             
         let alien = Aliens.init(normalAlien: "alien")
@@ -346,7 +294,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             winScreen()
         }
         print("Alien QUEUE: " + String(alienQueue))
-        print("Current number of Aliens: " + String(currentNrOfAliens))
         
 
     }
@@ -483,13 +430,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         if ((firstBody.categoryBitMask & photonTorpedoCategory) != 0) && ((secondBody.categoryBitMask & alienCategory) != 0 ){
-            if ((firstBody.node != nil) && (secondBody.node != nil )){
-                
-            torpedoDidColideWithAlien(torpedoNode: firstBody.node as! Torpedo, alienNode: secondBody.node as! Aliens)
-                
-            }else{
-                print("RIP, bodyNode = nil")
+            if self.alienHit == false{
+                if ((firstBody.node != nil) && (secondBody.node != nil )){
+                    torpedoDidColideWithAlien(torpedoNode: firstBody.node as! Torpedo, alienNode: secondBody.node as! Aliens)
+                    
+                    
+                    
+                }else{
+                    print("RIP, bodyNode == nil")
+                }
             }
+            
             
         }
 
@@ -505,7 +456,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 bombDidColideWithAlien(bombNode: secondBody.node as! SKSpriteNode, alienNode: firstBody.node as! Aliens)
                 
             }else{
-                print("RIP, bodyNode = nil")
+                print("RIP, bodyNode = nil BOTTOM AREA")
             }
         }
         
@@ -518,7 +469,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 bombDidColideWithAlien(bombNode: secondBody.node as! SKSpriteNode, alienNode: firstBody.node as! Aliens)
                 
             }else{
-                print("RIP, bodyNode = nil")
+                print("RIP, bodyNode = nil BOMB")
             }
         }
         
@@ -530,7 +481,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 torpedoDidColideWithPickup(torpedoNode: firstBody.node as! Torpedo, pickUpNode: secondBody.node as! Bomb)
             
             }else{
-                print("RIP, bodyNode = nil")
+                print("RIP, bodyNode = nil PICKUP")
             }
             
         }
@@ -539,6 +490,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func loseScreen(){
+        stopTimer()
         let loseLabel = SKLabelNode()
         loseLabel.text = "YOU LOSE"
         loseLabel.position = CGPoint(x: 0, y: 0)
@@ -592,9 +544,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func torpedoDidColideWithAlien(torpedoNode:Torpedo, alienNode:Aliens){
-        //self.scene?.removeFromParent()
-        //  fireTorpedo()
-        //let pointSize = CGSize(width: 50, height: 50)
         progress()
         let extraPoints = SKLabelNode(text: "+5")
         extraPoints.fontName = "AmericanTypewriter-Bold"
@@ -606,22 +555,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         outline.fontName = "AmericanTypewriter-Bold"
         outline.fontSize = 30
         outline.fontColor = UIColor.yellow
-        //  outline.position = alienNode.position
         outline.zPosition = 4
         addChild(extraPoints)
         extraPoints.addChild(outline)
         extraPoints.run(SKAction.scale(by: 2, duration: 0.3))
         extraPoints.run(SKAction.moveBy(x: 50, y: 150, duration: 1.5))
+        
+        
         alienNode.hp? -= 1
-        alienNode.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 30))
+        alienNode.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 40))
         self.run(SKAction.wait(forDuration: 0.2)){
-            alienNode.physicsBody?.applyImpulse(CGVector(dx: 0, dy: -30))
+            alienNode.physicsBody?.applyImpulse(CGVector(dx: 0, dy: -40))
         }
         torpedoNode.hp? -= 1
         if((alienNode.hp)! <= 0){
             self.run(SKAction.playSoundFileNamed("explosion.mp3", waitForCompletion: false))
             removeAliens(Alien: alienNode as! Aliens)
-            print ("CurrentNrOfAliens" + String(currentNrOfAliens))
             if (alienNode.stringName == "normalAlien"){
                // addAlien()
             }
@@ -653,8 +602,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if(torpedoNode.hp! <= 0){
             torpedoNode.removeFromParent()
-        }
-        else{
         }
         
         self.run(SKAction.wait(forDuration: 1)){
@@ -703,6 +650,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func winScreen(){
+        stopTimer()
         let winLabel = SKLabelNode()
         winLabel.text = "YOU WIN!"
         winLabel.position = CGPoint(x: 0, y: 0)
@@ -726,16 +674,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabel1.zPosition = 3
         
         self.removeAllChildren()
-        self.gameTimer.invalidate()
         self.addChild(winLabel)
         self.addChild(stopNode)
         self.addChild(scoreLabel1)
-        
+        //self.startMenu()
+
         self.run(SKAction.wait(forDuration: 6)){
             self.startMenu()
         }
     }
     func startMenu(){
+        self.removeAllAliens()
         if let scene = GKScene(fileNamed: "StartScenen") {
             
             // Get the SKScene from the loaded GKScene
@@ -773,12 +722,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
         if (self.menuButton.contains(pos)){
-            for node in self.children as [SKNode] {
-                node.isPaused = true
-            }
-            startMenu()
-            removeAllAliens()
-            self.removeFromParent()
+           // for node in self.children as [SKNode] {
+            //    node.isPaused = true
+           // }
+            gameData.attackRate = gameData.attackRate / 1.2
         }
     }
     func touchMoved(toPoint pos : CGPoint) {
@@ -815,9 +762,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         print("Music!")
     }
     func removeAliens(Alien : SKSpriteNode){
-        self.currentNrOfAliens -= 1
-        Alien.run(SKAction.removeFromParent())
+        if self.alienHit == false{
+            self.alienHit = true
+            self.currentNrOfAliens -= 1
+            Alien.run(SKAction.removeFromParent())
+            Alien.removeFromParent()
+            self.alienHit = false
+            print("Current number of Aliens: " + String(currentNrOfAliens))
+
+            self.children.count
+        }
         
+        
+    }
+    func currentNrOfAliensMinus(){
+    self.currentNrOfAliens -= 1
     }
     func removeAllAliens(){
         alienQueue = 0
@@ -832,6 +791,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     func resume(){
     
+    }
+    
+    func stopTimer(){
+        addAlienTimer.invalidate()
+        addAlienTimer = nil
+        gameTimer.invalidate()
+        gameTimer = nil
     }
     
 }

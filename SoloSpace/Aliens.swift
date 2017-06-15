@@ -28,7 +28,7 @@ class Aliens: SKSpriteNode {
         let texture = SKTexture(imageNamed: possibleAliens[0])
         super.init(texture:texture, color: SKColor.clear, size: texture.size())
         //MISC
-        hp = 1
+        hp = 5
 
     }
     
