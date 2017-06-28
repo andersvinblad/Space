@@ -11,12 +11,19 @@ import GameplayKit
 import CoreData
 
 class StartScene: SKScene {
+	
+	var shipNames = [String]()
+	var currentLevelRow = 1
+    var currentLevelNr = 1
+	var currentShipNr = 0
+	let NrOfShips = 4
     var started = false
     let gameData = GameData.shared
     var level = [SKSpriteNode]()
     var backgroundMusic: SKAudioNode!
     var entities = [GKEntity]()
     var graphs = [String : GKGraph]()
+	var upgradeButton :		SKSpriteNode!
     var newGameButton :     SKSpriteNode!
     var levelSelectButton:  SKSpriteNode!
     var loadoutButton :     SKSpriteNode!
@@ -29,12 +36,12 @@ class StartScene: SKScene {
     let displaySize: CGRect = UIScreen.main.bounds
     var menuItems = [SKSpriteNode]()
     var loadoutMenuItems = [SKSpriteNode]()
+	var levelMenuItems = [SKSpriteNode]()
     override func sceneDidLoad() {
-        if (started == false){
+        //if (started == false){
         
         
         
-        loadShopping()
         startMenu()
         starField = SKEmitterNode(fileNamed: "Starfield")
         starField.position = CGPoint(x: 0, y: 1400)
@@ -61,7 +68,7 @@ class StartScene: SKScene {
                                               SKAction.fadeOut(withDuration: 0.5),
                                               SKAction.removeFromParent()]))
             }
-        }
+        
     }
     
     
@@ -125,117 +132,175 @@ class StartScene: SKScene {
     }
     
     func startMenu(){
-        var CD = ShopThing()
-        CD.makeNew(name: String(gameData.score), amount: " ", amountUnit: " ", bought: true)
-        print(CD.getname())
+		//gameData.saveData()
+		gameData.loadData()
+		if gameData.difficulty >= 5{
+			currentLevelRow = Int(gameData.difficulty/5.0)
+		}
        // self.menuItems.removeAll()
+		
         self.removeChildren(in: level)
+		self.removeChildren(in: levelMenuItems)
+		self.removeChildren(in: loadoutMenuItems)
+		level.removeAll()
+		levelMenuItems.removeAll()
+		loadoutMenuItems.removeAll()
         let pulseUp = SKAction.scale(to: 1.5, duration: 1.5)
         let pulseDown = SKAction.scale(to: 1, duration: 1.5)
         let pulse = SKAction.sequence([pulseUp, pulseDown])
         let repeatPulse = SKAction.repeatForever(pulse)
+		
         newGameButton = SKSpriteNode(imageNamed: "quickStart")
         self.newGameButton.position = CGPoint(x: 0, y: 250)
         self.newGameButton.size = CGSize(width: self.displaySize.width / 1.3, height: self.displaySize.height / 7)
         self.newGameButton.zPosition = 1
         self.newGameButton.run(repeatPulse)
         
-        
-        
+		
         levelSelectButton = SKSpriteNode(imageNamed: "selectLevel")
         self.levelSelectButton.position = CGPoint(x: 0, y: 0)
         self.levelSelectButton.size = CGSize(width: self.displaySize.width / 1.3, height: self.displaySize.height / 7)
         self.levelSelectButton.zPosition = 1
         self.levelSelectButton.run(repeatPulse)
         
-        loadoutButton = SKSpriteNode(imageNamed: "loadout")
-        self.loadoutButton.position = CGPoint(x: 0, y: -250)
-        self.loadoutButton.size = CGSize(width: self.displaySize.width / 1.3, height: self.displaySize.height / 7)
-        self.loadoutButton.zPosition = 1
-        self.loadoutButton.run(repeatPulse)
-        
-        highScoreLabel = SKLabelNode(text: "High Score: " + String(gameData.score))
-       // highScoreLabel = SKLabelNode(text: String(GameData.getscore()))
-
-        highScoreLabel.position = CGPoint(x:0, y: 450)
-        highScoreLabel.fontName = "AmericanTypewriter-Bold"
-        highScoreLabel.fontSize = 60
-        highScoreLabel.fontColor = UIColor.white
+		loadoutButton = SKSpriteNode(imageNamed: "loadout")
+		self.loadoutButton.position = CGPoint(x: 0, y: -250)
+		self.loadoutButton.size = CGSize(width: self.displaySize.width / 1.3, height: self.displaySize.height / 7)
+		self.loadoutButton.zPosition = 1
+		self.loadoutButton.run(repeatPulse)
+		
+		self.upgradeButton = SKSpriteNode(imageNamed: "UpgradeButton")
+		self.upgradeButton.position = CGPoint(x: 0, y: -500)
+		self.upgradeButton.size = CGSize(width: self.displaySize.width / 1.3, height: self.displaySize.height / 7)
+		self.upgradeButton.zPosition = 1
+		self.upgradeButton.run(repeatPulse)
+		
+        self.highScoreLabel = SKLabelNode(text: "Points: " + String(gameData.score))
+        self.highScoreLabel.position = CGPoint(x:0, y: 450)
+        self.highScoreLabel.fontName = "AmericanTypewriter-Bold"
+        self.highScoreLabel.fontSize = 60
+        self.highScoreLabel.fontColor = UIColor.white
         self.highScoreLabel.run(repeatPulse)
-        if(started == false){
+
+		
+        if started == false{
+            started = true
             menuItems.append(levelSelectButton)
             menuItems.append(newGameButton)
-            menuItems.append(loadoutButton)
-            self.addChild(highScoreLabel)
-            started = true
+			menuItems.append(loadoutButton)
+			menuItems.append(upgradeButton)
+
+			//menuItems.append(self.highScoreLabel as! SKSpriteNode)
+          //  self.addChild(self.highScoreLabel)
         }
+		
         
         print("STARTMENU")
-        
-        for levels in 0...menuItems.count-1{
-        self.addChild(menuItems[levels])
-        }
-        
-        
+		self.removeChildren(in: menuItems)
+		self.highScoreLabel.removeFromParent()
+		if menuItems.count >= 1{
+			for levels in 0...menuItems.count-1{
+				self.addChild(menuItems[levels])
+			}
+			self.addChild(highScoreLabel)
+		}
+		
     }
-    
+	
     func levelSelect(){
         self.removeChildren(in: menuItems)
         self.highScoreLabel.removeFromParent()
-        level.removeAll()
-        //self.newGameButton.removeFromParent()
-        //  self.levelSelectButton.removeFromParent()
-        //self.removeAllChildren()
+		self.removeChildren(in: levelMenuItems)
+		levelMenuItems.removeAll()
+      //  level.removeAll()
         let pulseUp = SKAction.scale(to: 1.08, duration: 1)
         let pulseDown = SKAction.scale(to: 1, duration: 1)
         let pulse = SKAction.sequence([pulseUp, pulseDown])
         let repeatPulse = SKAction.repeatForever(pulse)
         
         for levels in 0...4{
-            var tempLevel = SKSpriteNode(imageNamed: "level" + String(levels + 1))
+            //var tempLevel = SKSpriteNode(imageNamed: "level" + String(levels + 1))
+			var tempLevel = SKSpriteNode(imageNamed: "EmptyButton")
             tempLevel.run(repeatPulse)
-            level.append(tempLevel)
+			tempLevel.position = CGPoint(x: 0, y: (500 - 200 * levels))
+			tempLevel.size = CGSize(width: self.displaySize.width / 1.3, height: self.displaySize.height / 7)
+			tempLevel.zPosition = 1
+			var tempLevelLabel = SKLabelNode(text: "level " + String((levels + 1) + ((currentLevelRow-1)*5)))
+			tempLevelLabel.fontName = "AmericanTypewriter"
+			tempLevelLabel.fontColor = UIColor.black
+			tempLevelLabel.fontSize = 45
+			tempLevelLabel.position.y -= 20
+			tempLevelLabel.zPosition = 2
+			tempLevel.addChild(tempLevelLabel)
+            levelMenuItems.append(tempLevel)
+			level.append(tempLevel)
+			self.addChild(tempLevel)
         }
-        
-        for levels in 0...level.count-1{
-            level[levels].position = CGPoint(x: 0, y: (500 - 200 * levels))
-            level[levels].size = CGSize(width: self.displaySize.width / 1.3, height: self.displaySize.height / 7)
-            level[levels].zPosition = 1
-            self.addChild(level[levels])
-        }
-        
-        
-        
+		
+		var backButton = SKSpriteNode(imageNamed: "ArrowLeft")
+		backButton.position = CGPoint(x: -self.size.width/2 + 70, y: -self.size.height/2.8)
+		levelMenuItems.append(backButton)
+		self.addChild(backButton)
+		
+		var nextButton = SKSpriteNode(imageNamed: "ArrowRight")
+		nextButton.position = CGPoint(x: self.size.width/2 - 70, y: -self.size.height/2.8)
+		levelMenuItems.append(nextButton)
+		self.addChild(nextButton)
+		
+		var backToMenuButton = SKSpriteNode(imageNamed: "backButton")
+		backToMenuButton.position = CGPoint(x: 0, y: -self.size.height/2.8)
+		self.addChild(backToMenuButton)
+		levelMenuItems.append(backToMenuButton)
+
     }
-    
-    func loadoutMenu(){
-        self.highScoreLabel.removeFromParent()
-        self.removeChildren(in: menuItems)
-       // self.menuItems.removeAll()
-        //level.removeAll()
-        //self.newGameButton.removeFromParent()
-        //  self.levelSelectButton.removeFromParent()
-        //self.removeAllChildren()
-        let pulseUp = SKAction.scale(to: 2, duration: 1.5)
-        let pulseDown = SKAction.scale(to: 1, duration: 1.5)
-        let pulse = SKAction.sequence([pulseUp, pulseDown])
-        let repeatPulse = SKAction.repeatForever(pulse)
-        
-        for levels in 0...3{
-            var tempLevel = SKSpriteNode(imageNamed: "ship" + String(levels + 1))
-            tempLevel.run(repeatPulse)
-            loadoutMenuItems.append(tempLevel)
-        }
-        
-        for levels in 0...loadoutMenuItems.count-1{
-            loadoutMenuItems[levels].position = CGPoint(x: 0, y: (500 - 200 * levels))
-            loadoutMenuItems[levels].size = CGSize(width: self.displaySize.width / 1.5, height: self.displaySize.height / 12)
-            loadoutMenuItems[levels].zPosition = 1
-            self.addChild(loadoutMenuItems[levels])
-        }
-        
-        
-        
+	
+	func loadoutMenu(){
+		self.highScoreLabel.removeFromParent()
+		self.removeChildren(in: menuItems)
+		if loadoutMenuItems.isEmpty{
+			let pulseUp = SKAction.scale(to: 2, duration: 1.5)
+			let pulseDown = SKAction.scale(to: 1, duration: 1.5)
+			let pulse = SKAction.sequence([pulseUp, pulseDown])
+			let repeatPulse = SKAction.repeatForever(pulse)
+			
+			for names in 0...3{
+				var shipName = String( "ship" + String(names + 1))
+				//self.shipNames.append(shipName!)
+			}
+			self.shipNames.append("playerYellow")
+			self.shipNames.append("playerBlue")
+			self.shipNames.append("playerRed")
+			self.shipNames.append("playerGreen")
+			self.shipNames.append("playerWhite")
+
+			
+			
+			var shipSprite = SKSpriteNode(imageNamed: shipNames[0])
+			shipSprite.run(repeatPulse)
+			shipSprite.position = CGPoint(x: 0, y: 0)
+			shipSprite.size = CGSize(width: self.displaySize.width, height: self.displaySize.height / 2)
+			shipSprite.zPosition = 1
+			loadoutMenuItems.append(shipSprite)
+			
+			
+			
+			var backButton = SKSpriteNode(imageNamed: "ArrowLeft")
+			backButton.position = CGPoint(x: -self.size.width/2 + 70, y: -self.size.height/2.8)
+			loadoutMenuItems.append(backButton)
+			
+			var nextButton = SKSpriteNode(imageNamed: "ArrowRight")
+			nextButton.position = CGPoint(x: self.size.width/2 - 70, y: -self.size.height/2.8)
+			loadoutMenuItems.append(nextButton)
+			
+			var backToMenuButton = SKSpriteNode(imageNamed: "StartMenuButton")
+			backToMenuButton.position = CGPoint(x: 0, y: -self.size.height/2.8)
+			loadoutMenuItems.append(backToMenuButton)
+		}
+		
+		for index in 0...loadoutMenuItems.count - 1{
+			self.addChild(loadoutMenuItems[index])
+		}
+		
     }
     
     func startGame(){
@@ -252,11 +317,11 @@ class StartScene: SKScene {
                 // Present the scene
                 if let view = self.view as! SKView? {
                     
-                    view.presentScene(sceneNode, transition: SKTransition.flipHorizontal(withDuration: 1))
+                    view.presentScene(sceneNode, transition: SKTransition.flipHorizontal(withDuration: 0.5))
                     view.ignoresSiblingOrder = true
                     
-                    view.showsFPS = true
-                    view.showsNodeCount = true
+                   // view.showsFPS = true
+                   // view.showsNodeCount = true
                     
                 }
             }
@@ -290,84 +355,158 @@ class StartScene: SKScene {
         
         if (self.newGameButton.contains(pos)){
             self.run(SKAction.playSoundFileNamed("select.wav", waitForCompletion: true))
-            
+			self.removeChildren(in: menuItems)
             startGame()
             
         }
         if (self.levelSelectButton.contains(pos)){
             self.run(SKAction.playSoundFileNamed("select.wav", waitForCompletion: true))
-            
+			self.removeChildren(in: menuItems)
             levelSelect()
             
             
         }
-        if (self.loadoutButton.contains(pos)){
-            loadoutMenu()
-            self.run(SKAction.playSoundFileNamed("select.wav", waitForCompletion: true))
-            
-        }
+		if (self.loadoutButton.contains(pos)){
+			loadoutMenu()
+			self.removeChildren(in: menuItems)
+			self.run(SKAction.playSoundFileNamed("select.wav", waitForCompletion: true))
+			
+		}
+		
+		if (self.upgradeButton.contains(pos)){
+
+			if gameData.score >= Int64(50 / gameData.attackRate){
+				gameData.score -= Int64(50 / gameData.attackRate)
+				self.highScoreLabel.removeFromParent()
+				self.highScoreLabel.text = "Points: " + String(gameData.score)
+				self.addChild(highScoreLabel)
+				gameData.attackRate = gameData.attackRate/1.2
+			}
+			self.run(SKAction.playSoundFileNamed("select.wav", waitForCompletion: true))
+			
+		}
         if level.count >= 1 {
             for levels in 0...level.count-1{
                 if (level[levels].contains(pos)){
-                    gameData.difficulty = (levels + 1) * 2
+                    gameData.difficulty = Double((levels + 1) + (5 * currentLevelRow))
                     startGame()
                 }
             }
+			for levels in 5...levelMenuItems.count-1{
+				if levelMenuItems[levels].contains(pos){
+					self.run(SKAction.playSoundFileNamed("select.wav", waitForCompletion: true))
+					switch levels {
+						
+					case 5:
+						print("Left Arrow")
+						if (currentLevelRow >= 2){
+							currentLevelRow -= 1
+							levelSelect()
+						}
+						
+					case 6:
+						print("Right Arrow")
+						currentLevelRow += 1
+						levelSelect()
+						print(currentLevelRow)
+					case 7:
+						print("Middle")
+						startMenu()
+						self.removeChildren(in: levelMenuItems)
+					default:
+						startMenu()
+						self.removeChildren(in: levelMenuItems)
+					}
+				}
+				
+			}
+
         }
-        if loadoutMenuItems.count >= 1 {
-            for levels in 0...loadoutMenuItems.count-1{
-                if (loadoutMenuItems[levels].contains(pos)){
-                    gameData.shipName = "ship" + String(levels + 1)
-                    self.run(SKAction.playSoundFileNamed("select", waitForCompletion: false))
-                    self.run(SKAction.wait(forDuration: 0.2)){
-                        self.startMenu()
-                    }
-                    self.removeChildren(in: loadoutMenuItems)
-                }
+        if menuItems.isEmpty == false{
+            for levels in 0...menuItems.count-1{
+                
             }
         }
-        
-        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-            n.position = pos
-            n.strokeColor = SKColor.green
-            self.addChild(n)
-            
-        }
-        
+		
+		if loadoutMenuItems.count >= 1 {
+			for levels in 0...loadoutMenuItems.count-1{
+				if loadoutMenuItems[levels].contains(pos){
+					switch levels {
+						
+					case 0:
+						gameData.shipName = shipNames[currentShipNr]
+						self.run(SKAction.playSoundFileNamed("select", waitForCompletion: false))
+						self.run(SKAction.wait(forDuration: 0.2)){
+							self.startMenu()
+						}
+						self.removeChildren(in: loadoutMenuItems)
+						
+					case 1:
+						currentShipNr -= 1
+						if currentShipNr <= -1{
+							currentShipNr = NrOfShips - 1
+						}
+						currentShipNr = currentShipNr % NrOfShips
+						print(currentShipNr)
+						loadoutMenuItems[0].texture = SKTexture(imageNamed: shipNames[currentShipNr])
+					case 2:
+						currentShipNr += 1
+						currentShipNr = currentShipNr % NrOfShips
+						loadoutMenuItems[0].texture = SKTexture(imageNamed: shipNames[currentShipNr])
+					case 3:
+						startMenu()
+						self.removeChildren(in: loadoutMenuItems)
+					default:
+						startMenu()
+						self.removeChildren(in: loadoutMenuItems)
+					}
+				}
+				
+			}
+		}
+		
+		
+		if let n = self.spinnyNode?.copy() as! SKShapeNode? {
+			n.position = pos
+			n.strokeColor = SKColor.green
+			self.addChild(n)
+			
+		}
+		
     }
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let label = self.label {
-            label.run(SKAction.init(named: "Pulse")!, withKey: "fadeInOut")
-        }
-        
-        for t in touches { self.touchDown(atPoint: t.location(in: self)) }
-    }
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchMoved(toPoint: t.location(in: self)) }
-        self.run(SKAction.moveBy(x: 100, y: 0, duration: 1))
-    }
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
-    }
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
-    }
-    override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
-        
-        // Initialize _lastUpdateTime if it has not already been
-        if (self.lastUpdateTime == 0) {
-            self.lastUpdateTime = currentTime
-        }
-        
-        // Calculate time since last update
-        let dt = currentTime - self.lastUpdateTime
-        
+	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+		if let label = self.label {
+			label.run(SKAction.init(named: "Pulse")!, withKey: "fadeInOut")
+		}
+		
+		for t in touches { self.touchDown(atPoint: t.location(in: self)) }
+	}
+	override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+		for t in touches { self.touchMoved(toPoint: t.location(in: self)) }
+		self.run(SKAction.moveBy(x: 100, y: 0, duration: 1))
+	}
+	override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+		for t in touches { self.touchUp(atPoint: t.location(in: self)) }
+	}
+	override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+		for t in touches { self.touchUp(atPoint: t.location(in: self)) }
+	}
+	override func update(_ currentTime: TimeInterval) {
+		// Called before each frame is rendered
+		
+		// Initialize _lastUpdateTime if it has not already been
+		if (self.lastUpdateTime == 0) {
+			self.lastUpdateTime = currentTime
+		}
+		
+		// Calculate time since last update
+		let dt = currentTime - self.lastUpdateTime
+		
         // Update entities
         for entity in self.entities {
             entity.update(deltaTime: dt)
         }
-        
+		
         self.lastUpdateTime = currentTime
     }
 }

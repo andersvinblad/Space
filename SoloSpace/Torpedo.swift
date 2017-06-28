@@ -28,6 +28,12 @@ class Torpedo: SKSpriteNode {
         else if (weaponType == "bigLaser"){
             hp = 3
         }
+		else if (weaponType == "bigLaserW"){
+			hp = 5
+		}
+		else if (weaponType == "bigLaser1"){
+			hp = 5
+		}
         stringName = weaponType
         let texture = SKTexture(imageNamed: weaponType)
         super.init(texture:texture, color: SKColor.clear, size: texture.size())

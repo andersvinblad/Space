@@ -33,10 +33,10 @@ class Aliens: SKSpriteNode {
     }
     
     init(bigAlien:String){
-        stringName = "bigAlien"
+        stringName = bigAlien
         let texture = SKTexture(imageNamed: bigAlien)
         super.init(texture:texture, color: SKColor.clear, size: texture.size())
-        hp = 10
+        hp = 100
     }
     
     required init?(coder aDecoder: NSCoder) {
