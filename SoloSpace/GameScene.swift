@@ -16,6 +16,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 	var bigAlienIsAdded = false
 	var alienHit = false
 	var addAlienTimer : Timer!
+	var winTimer : Timer!
 	var progressBarFrame : SKShapeNode!
 	var progressBar : SKSpriteNode!
 	var gameData = GameData.shared
@@ -27,6 +28,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 	var soundButton:SKSpriteNode!
 	var menuButton:SKSpriteNode!
 	var bombButton:SKSpriteNode!
+	var boostButton:SKSpriteNode!
+	var nrOfBombLabel:SKLabelNode!
 	let displaySize: CGRect = UIScreen.main.bounds
 	var displayWidth: CGFloat = 0.0
 	var displayHeight: CGFloat = 0.0
@@ -120,7 +123,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 		bombButton = SKSpriteNode(imageNamed: "bombButton")
 		bombButton.position = CGPoint(x:+self.frame.width/2 - 50, y: -self.frame.height/7 - 60)
 		self.addChild(bombButton)
+		nrOfBombLabel = SKLabelNode(text: "3/3")
+		nrOfBombLabel.fontSize = 40
+		bombButton.addChild(nrOfBombLabel)
+		nrOfBombLabel.position.y += 50
 		///
+		
+		/// SUPER BOOST BUTTON
+		boostButton = SKSpriteNode(imageNamed: "boostButton")
+		boostButton.position = CGPoint(x:-self.frame.width/2 + 50, y: -self.frame.height/7 - 60)
+		self.addChild(boostButton)
 		
 		menuButton = SKSpriteNode(imageNamed: "exitButton")
 		menuButton.position = CGPoint(x:self.frame.width/2 - 50, y: self.frame.height/2 - 60)
@@ -163,7 +175,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 		//gameTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(addBigAlien), userInfo: nil, repeats: true)
 		
 		self.run(SKAction.wait(forDuration: 1)){
-			self.addAlienTimer = Timer.scheduledTimer(timeInterval: (TimeInterval(10.0 / Double(self.gameData.difficulty * 5))), target: self, selector: #selector(self.addAlien), userInfo: nil, repeats: true)
+			self.addAlienTimer = Timer.scheduledTimer(timeInterval: (TimeInterval(10.0 / Double(self.gameData.difficulty * 2))), target: self, selector: #selector(self.addAlien), userInfo: nil, repeats: true)
 			
 		}
 		
@@ -173,14 +185,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 		
 		//gameTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(fireTorpedo), userInfo: nil, repeats: true)
 		
-		gameTimer = Timer.scheduledTimer(timeInterval: 38, target: self, selector: #selector(winScreen), userInfo: nil, repeats: false)
+		winTimer = Timer.scheduledTimer(timeInterval: 38, target: self, selector: #selector(winScreen), userInfo: nil, repeats: false)
 		
 		
 		self.progressBar = SKSpriteNode(color: UIColor.yellow, size: CGSize(width: 1, height: 20))
 		self.progressBar.position = CGPoint(x: 0, y: self.frame.height/2 - 50)
 		self.addChild(progressBar)
 		progressBarFrame = SKShapeNode(rectOf: CGSize(width: 300, height: progressBar.size.height))
-		// progressBarFrame.frame.width = 300
 		progressBarFrame.position = progressBar.position
 		progressBarFrame.fillColor = UIColor.clear
 		progressBarFrame.strokeColor = UIColor.cyan
@@ -193,17 +204,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 	}
 	func progress(){
 		if (progressBar.size.width <= progressBarFrame.frame.width){
-			self.progressBar.size.width += CGFloat((10/self.gameData.difficulty))
+			self.progressBar.size.width += CGFloat((40/self.gameData.difficulty))
 		}
-		else {
-			boostWeapon()
-			progressBar.size.width = 1
-			if soundOption == true{
-				self.run(SKAction.playSoundFileNamed("pow", waitForCompletion: false))
-			}
-		}
-		
-		
 	}
 	func setupPlayer(){
 		alienHit = false
@@ -547,13 +549,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 					self.winScreen()
 				}
 			}
-			
+			if gameData.difficulty <= 20{
 			let explosion = SKEmitterNode(fileNamed: "Explosion")
 			explosion?.position = alienNode.position
 			self.addChild(explosion!)
 			// self.run(SKAction.playSoundFileNamed("explosion.mp3", waitForCompletion: false))
 			self.run(SKAction.wait(forDuration: 0.5)){
 				explosion?.removeFromParent()
+			}
 			}
 			alienNode.removeFromParent()
 			self.scoreLabel.text = "Score: " + String(score)
@@ -587,7 +590,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 		print("BOMB")
 		
 		
-		alienNode.hp? -= 100
+		alienNode.hp? -= 5
 		if((alienNode.hp)! <= 0){
 			
 			
@@ -604,11 +607,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 	}
 	
 	func boostWeapon(){
-		currentWeapon = "bigLaser1"
 		
-		self.run(SKAction.wait(forDuration: 6)){
-			self.currentWeapon = "laser"
+		if (progressBar.size.width >= progressBarFrame.frame.width){
+			currentWeapon = "bigLaser1"
+			self.run(SKAction.wait(forDuration: 2)){
+				self.currentWeapon = "laser"
+			}
 		}
+		
 		
 	}
 	func loseScreen(){
@@ -733,6 +739,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 			
 			if (spaceship.nrOfBombs >= 1){
 				fireBomb()
+				
+				switch nrOfBombLabel.text {
+    case "3/3"?:
+					nrOfBombLabel.text = "2/3"
+	case "2/3"?:
+					nrOfBombLabel.text = "1/3"
+	case "1/3"?:
+					nrOfBombLabel.text = "0/3"
+    default:
+					nrOfBombLabel.text = "0/3"
+				}
 			}
 		}
 		if (self.menuButton.contains(pos)){
@@ -740,7 +757,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 		}
 	}
 	func touchMoved(toPoint pos : CGPoint) {
-		spaceship.run(SKAction.move(to: CGPoint(x: pos.x, y: -self.frame.height/2 + 300), duration: 0))
+		if pos.y <= -self.frame.height/2 + 200{
+		spaceship.run(SKAction.move(to: CGPoint(x: pos.x, y: -self.frame.height/2 + 200), duration: 0))
+		}
 		// thruster.position = CGPoint(x: spaceship.position.x - 10, y: spaceship.position.y - 50)
 		//spaceship.run(SKAction.moveTo(x: pos.x, duration: 0.2))
 	}
@@ -764,6 +783,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 				stopMusic()
 			}
 			
+		}
+		
+		if boostButton.contains(pos){
+			boostWeapon()
+			progressBar.size.width = 1
+			if soundOption == true{
+				self.run(SKAction.playSoundFileNamed("pow", waitForCompletion: false))
+			}
 		}
 		
 	}
@@ -832,9 +859,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 	
 	func stopTimer(){
 		self.addAlienTimer.invalidate()
-		addAlienTimer = nil
+		//addAlienTimer = nil
 		self.gameTimer.invalidate()
-		gameTimer = nil
+		//gameTimer = nil
 	}
 	
 }

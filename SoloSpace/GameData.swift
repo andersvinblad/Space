@@ -22,22 +22,6 @@ class GameData {
     //private init() { }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 	func loadData(){
 		
 		let arr = defaults.object(forKey:"SavedArray") as? [String] ?? [String]()
@@ -48,11 +32,6 @@ class GameData {
 			currentWeapon = arr[3]
 			shipName = arr[4]
 		}
-
-
-		
-		
-		
 	}
 	func saveData(){
 		var arr = [String]()
@@ -63,126 +42,4 @@ class GameData {
 		arr.append("playerRed")
 		defaults.set(arr, forKey: "SavedArray")
 	}
-	
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    //COREDATA TESTS    //COREDATA TESTS    //COREDATA TESTS    //COREDATA TESTS    //COREDATA TESTS    //COREDATA TESTS
-    
-    
-    
-    
-    var CDobject : NSManagedObject?
-    
-    func loadFromCD(data : NSManagedObject)
-    {
-        CDobject = data
-    }
-    
-    func makeNew(name : String)
-    {
-        
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
-        
-        let entity = NSEntityDescription.entity(forEntityName: "GameDataCD", in: managedContext)!
-        
-        self.CDobject = NSManagedObject(entity: entity, insertInto: managedContext)
-        
-        self.CDobject!.setValue(name, forKeyPath: "score")
-        
-        do {
-            try managedContext.save()
-        } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
-        }
-    }
-    
-    func getscore() -> String
-    {
-        return CDobject!.value(forKeyPath: "score") as! String
-    }
-    func getamountunit() -> String
-    {
-        var amountUnitText = ""
-        
-        if let shopAmount = CDobject!.value(forKeyPath: "amount") as? Int
-        {
-            amountUnitText = String(shopAmount)
-        }
-        if let shopAmountType = CDobject!.value(forKeyPath: "amountUnit") as? String
-        {
-            amountUnitText = amountUnitText + " " + shopAmountType
-        }
-        return amountUnitText
-    }
-    
-    func setBought(boughtValue : Bool)
-    {
-        /*
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
-        
-        
-        CDobject!.setValue(boughtValue, forKeyPath: "bought")
-        
-        
-        do {
-            try managedContext.save()
-        } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
-        }
- */
-    }
-    
-    
-    func deleteMe()
-    {
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
-        
-        managedContext.delete(self.CDobject!)
-        
-        do {
-            try managedContext.save()
-        } catch {
-            let saveError = error as NSError
-            print(saveError)
-        }
-        
-    }
-
 }

@@ -18,8 +18,6 @@
 		AEB367921ED2116D004BA9D1 /* music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AEB367911ED2116D004BA9D1 /* music.mp3 */; };
 		AEB367941ED21724004BA9D1 /* soloSpaceOst.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AEB367931ED21724004BA9D1 /* soloSpaceOst.mp3 */; };
 		AEB367961ED2D3A6004BA9D1 /* GameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB367951ED2D3A6004BA9D1 /* GameData.swift */; };
-		AEC297761EE54291004E7D47 /* SoloSpaceCD.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AEC297741EE54291004E7D47 /* SoloSpaceCD.xcdatamodeld */; };
-		AEC297781EE54DE3004E7D47 /* shopThing.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC297771EE54DE3004E7D47 /* shopThing.swift */; };
 		AEC297801EE5859B004E7D47 /* pew.wav in Resources */ = {isa = PBXBuildFile; fileRef = AEC2977F1EE5859B004E7D47 /* pew.wav */; };
 		AEC297841EE58BD2004E7D47 /* pow.wav in Resources */ = {isa = PBXBuildFile; fileRef = AEC297811EE58BD2004E7D47 /* pow.wav */; };
 		AEC297851EE58BD2004E7D47 /* select.wav in Resources */ = {isa = PBXBuildFile; fileRef = AEC297821EE58BD2004E7D47 /* select.wav */; };
@@ -53,8 +51,6 @@
 		AEB367911ED2116D004BA9D1 /* music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music.mp3; sourceTree = "<group>"; };
 		AEB367931ED21724004BA9D1 /* soloSpaceOst.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = soloSpaceOst.mp3; path = SoloSpace/soloSpaceOst.mp3; sourceTree = "<group>"; };
 		AEB367951ED2D3A6004BA9D1 /* GameData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameData.swift; path = SoloSpace/GameData.swift; sourceTree = "<group>"; };
-		AEC297751EE54291004E7D47 /* SoloSpaceCD.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SoloSpaceCD.xcdatamodel; sourceTree = "<group>"; };
-		AEC297771EE54DE3004E7D47 /* shopThing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = shopThing.swift; path = ../shopThing.swift; sourceTree = "<group>"; };
 		AEC2977F1EE5859B004E7D47 /* pew.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = pew.wav; path = SoloSpace/pew.wav; sourceTree = "<group>"; };
 		AEC297811EE58BD2004E7D47 /* pow.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pow.wav; sourceTree = "<group>"; };
 		AEC297821EE58BD2004E7D47 /* select.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = select.wav; sourceTree = "<group>"; };
@@ -167,12 +163,10 @@
 		AEF45F1B1EBD299300C0D62D /* SoloSpace */ = {
 			isa = PBXGroup;
 			children = (
-				AEC297771EE54DE3004E7D47 /* shopThing.swift */,
 				AEF45F221EBD299300C0D62D /* GameScene.swift */,
 				AE92C7B21EC991060062330C /* StartScene.swift */,
 				AEF45F241EBD299300C0D62D /* GameViewController.swift */,
 				AE92C7B11EC991060062330C /* StartGameViewController.swift */,
-				AEC297741EE54291004E7D47 /* SoloSpaceCD.xcdatamodeld */,
 			);
 			path = SoloSpace;
 			sourceTree = "<group>";
@@ -267,8 +261,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE92C7B41EC991060062330C /* StartGameViewController.swift in Sources */,
-				AEC297761EE54291004E7D47 /* SoloSpaceCD.xcdatamodeld in Sources */,
-				AEC297781EE54DE3004E7D47 /* shopThing.swift in Sources */,
 				AE92C7E21ECD71760062330C /* Bombs.swift in Sources */,
 				AEF45F761EC4345F00C0D62D /* Aliens.swift in Sources */,
 				AEF45F231EBD299300C0D62D /* GameScene.swift in Sources */,
@@ -451,20 +443,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		AEC297741EE54291004E7D47 /* SoloSpaceCD.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				AEC297751EE54291004E7D47 /* SoloSpaceCD.xcdatamodel */,
-			);
-			currentVersion = AEC297751EE54291004E7D47 /* SoloSpaceCD.xcdatamodel */;
-			name = SoloSpaceCD.xcdatamodeld;
-			path = ../SoloSpaceCD.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = AEF45F111EBD299300C0D62D /* Project object */;
 }

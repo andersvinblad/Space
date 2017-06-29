@@ -19,7 +19,7 @@ class Aliens: SKSpriteNode {
 
     
     
-    init(normalAlien:String){
+	init(normalAlien:String){
         //textures
         stringName = "normalAlien"
         var possibleAliens = ["alienCircle", "hex", "shooterAlien", "starAlien"]
@@ -28,7 +28,7 @@ class Aliens: SKSpriteNode {
         let texture = SKTexture(imageNamed: possibleAliens[0])
         super.init(texture:texture, color: SKColor.clear, size: texture.size())
         //MISC
-        hp = 5
+        self.hp = (Int(GameData.shared.difficulty / 2) + 3)
 
     }
     
@@ -36,7 +36,7 @@ class Aliens: SKSpriteNode {
         stringName = bigAlien
         let texture = SKTexture(imageNamed: bigAlien)
         super.init(texture:texture, color: SKColor.clear, size: texture.size())
-        hp = 100
+        hp = Int((GameData.shared.difficulty / 3) * Double(10))
     }
     
     required init?(coder aDecoder: NSCoder) {
