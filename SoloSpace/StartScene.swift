@@ -299,8 +299,16 @@ class StartScene: SKScene {
 		}
     }
 	
-	func resetMenu(){}
-	func weaponMenu(){}
+	func resetMenu(){
+		self.run(SKAction.wait(forDuration: 0.2)){
+			self.startMenu()
+		}
+	}
+	func weaponMenu(){
+		self.run(SKAction.wait(forDuration: 0.2)){
+			self.startMenu()
+		}
+	}
 	func shipSelect(){
 		self.run(SKAction.wait(forDuration: 0.5)){
 			self.highScoreLabel.removeFromParent()
@@ -349,7 +357,11 @@ class StartScene: SKScene {
 			}
 		}
 	}
-	func bombMenu(){}
+	func bombMenu(){
+		self.run(SKAction.wait(forDuration: 0.2)){
+			self.startMenu()
+		}
+	}
 	
 	
 	
@@ -371,8 +383,8 @@ class StartScene: SKScene {
                     view.presentScene(sceneNode, transition: SKTransition.flipHorizontal(withDuration: 0.5))
                     view.ignoresSiblingOrder = true
                     
-                   // view.showsFPS = true
-                   // view.showsNodeCount = true
+                    view.showsFPS = false
+					view.showsNodeCount = false
                     
                 }
             }
@@ -502,14 +514,14 @@ class StartScene: SKScene {
 							////RESET
 							gameData.attackRate = 1
 							self.run(SKAction.wait(forDuration: 0.2)){
-								self.startMenu()
+								self.resetMenu()
 							}
 							self.removeChildren(in: loadoutMenuItems)
 							loadoutMenuItems.removeAll()
 							
 						case 1:
 							//WEAPON
-							startMenu()
+							weaponMenu()
 							self.removeChildren(in: loadoutMenuItems)
 							loadoutMenuItems.removeAll()
 						case 2:
@@ -520,7 +532,7 @@ class StartScene: SKScene {
 							
 						case 3:
 							//BOMB
-							startMenu()
+							bombMenu()
 							self.removeChildren(in: loadoutMenuItems)
 							loadoutMenuItems.removeAll()
 						default:

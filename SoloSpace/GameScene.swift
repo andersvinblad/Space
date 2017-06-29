@@ -632,7 +632,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 		stopNode.position = CGPoint(x: 0, y: 0)
 		stopNode.zPosition = 2
 		
-		gameData.score = Int64(score)
+		//gameData.score = Int64(score)
 		
 		let  scoreLabel1 = SKLabelNode(text: "You get no Points")
 		scoreLabel1.position = CGPoint(x:0, y: 150)
@@ -702,7 +702,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 			//self.startMenu()
 			
 			self.run(SKAction.wait(forDuration: 6)){
-				self.startMenu()
+				self.run(SKAction.wait(forDuration: 6)){
+					if let scene = GKScene(fileNamed: "StartScenen") {
+						
+						// Get the SKScene from the loaded GKScene
+						if let sceneNode = scene.rootNode as! StartScene? {
+							
+							// Copy gameplay related content over to the scene
+							
+							// Set the scale mode to scale to fit the window
+							sceneNode.scaleMode = .aspectFill
+							
+							// Present the scene
+							if let view = self.view as! SKView? {
+								view.presentScene(sceneNode)
+								
+								view.ignoresSiblingOrder = true
+								
+								view.showsFPS = false
+								view.showsNodeCount = false
+							}
+						}
+					}
+				}
 			}
 		}
 	}
@@ -726,8 +748,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 					
 					view.ignoresSiblingOrder = true
 					
-					view.showsFPS = true
-					view.showsNodeCount = true
+					view.showsFPS = false
+					view.showsNodeCount = false
 				}
 			}
 		}
@@ -753,6 +775,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 			}
 		}
 		if (self.menuButton.contains(pos)){
+			stopTimer()
 			startMenu()
 		}
 	}
