@@ -38,8 +38,8 @@ class GameData {
 		arr.append(String(score))
 		arr.append(String(difficulty))
 		arr.append(String(attackRate))
-		arr.append("wep2")
-		arr.append("playerRed")
+		arr.append(currentWeapon)
+		arr.append(shipName)
 		defaults.set(arr, forKey: "SavedArray")
 	}
 }

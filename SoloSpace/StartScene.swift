@@ -299,6 +299,8 @@ class StartScene: SKScene {
 		}
     }
 	
+	func resetMenu(){}
+	func weaponMenu(){}
 	func shipSelect(){
 		self.run(SKAction.wait(forDuration: 0.5)){
 			self.highScoreLabel.removeFromParent()
@@ -347,6 +349,10 @@ class StartScene: SKScene {
 			}
 		}
 	}
+	func bombMenu(){}
+	
+	
+	
 	
     func startGame(){
         self.removeAllChildren()
@@ -414,7 +420,8 @@ class StartScene: SKScene {
 				self.highScoreLabel.removeFromParent()
 				self.pointsNeeded.removeFromParent()
 				self.run(SKAction.playSoundFileNamed("select.wav", waitForCompletion: true))
-				loadoutMenu()
+				//loadoutMenu()
+				shipSelect()
 				
 			}
 			
@@ -535,6 +542,7 @@ class StartScene: SKScene {
 							
 						case 0:
 							gameData.shipName = shipNames[currentShipNr]
+							gameData.saveData()
 							self.run(SKAction.playSoundFileNamed("select", waitForCompletion: false))
 							self.run(SKAction.wait(forDuration: 0.2)){
 								self.startMenu()
