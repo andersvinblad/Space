@@ -175,7 +175,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 		//gameTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(addBigAlien), userInfo: nil, repeats: true)
 		
 		self.run(SKAction.wait(forDuration: 1)){
-			self.addAlienTimer = Timer.scheduledTimer(timeInterval: (TimeInterval(10.0 / Double(self.gameData.difficulty * 2))), target: self, selector: #selector(self.addAlien), userInfo: nil, repeats: true)
+			self.addAlienTimer = Timer.scheduledTimer(timeInterval: (TimeInterval(8.0 / Double(self.gameData.difficulty * 3))), target: self, selector: #selector(self.addAlien), userInfo: nil, repeats: true)
 			
 		}
 		
@@ -185,7 +185,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 		
 		//gameTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(fireTorpedo), userInfo: nil, repeats: true)
 		
-		winTimer = Timer.scheduledTimer(timeInterval: 38, target: self, selector: #selector(winScreen), userInfo: nil, repeats: false)
+		winTimer = Timer.scheduledTimer(timeInterval: 42, target: self, selector: #selector(winScreen), userInfo: nil, repeats: false)
 		
 		
 		self.progressBar = SKSpriteNode(color: UIColor.yellow, size: CGSize(width: 1, height: 20))
@@ -292,7 +292,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 			alien.physicsBody?.applyImpulse(CGVector(dx: 0, dy: -100))
 			
 			
-			self.run(SKAction.wait(forDuration: 5)){
+			self.run(SKAction.wait(forDuration: 8)){
 				
 				self.removeAliens(Alien: alien)
 				
@@ -383,7 +383,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 	}
 	func fireTorpedo(){
 		if (soundOption == true){
-		self.run(SKAction.playSoundFileNamed("pew.wav", waitForCompletion: true))
+			//self.run(SKAction.playSoundFileNamed("pew.wav", waitForCompletion: true))
+			self.run(SKAction.playSoundFileNamed("Laser_Shoot4.wav", waitForCompletion: true))
+
 		}
 		let torpedoNode = Torpedo(weaponType: currentWeapon)
 		
@@ -590,7 +592,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 		print("BOMB")
 		
 		
-		alienNode.hp? -= 5
+		alienNode.hp? -= Int(5.0 / gameData.attackRate)
 		if((alienNode.hp)! <= 0){
 			
 			
@@ -609,6 +611,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 	func boostWeapon(){
 		
 		if (progressBar.size.width >= progressBarFrame.frame.width){
+			progressBar.size.width = 1
 			currentWeapon = "bigLaser1"
 			self.run(SKAction.wait(forDuration: 2)){
 				self.currentWeapon = "laser"
@@ -687,7 +690,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 			stopNode.zPosition = 2
 			
 			
-			self.gameData.score = Int64(self.score)
+			self.gameData.score += Int64(self.score)
+			self.gameData.saveData()
 			let  scoreLabel1 = SKLabelNode(text: "Score: " + String(self.score))
 			scoreLabel1.position = CGPoint(x:0, y: 150)
 			scoreLabel1.fontName = "AmericanTypewriter-Bold"
@@ -730,8 +734,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 	}
 	func startMenu(){
 		self.removeAllAliens()
-		gameData.score += score
-		gameData.saveData()
+		//gameData.score += score
+		//gameData.saveData()
 		if let scene = GKScene(fileNamed: "StartScenen") {
 			
 			// Get the SKScene from the loaded GKScene
@@ -810,7 +814,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 		
 		if boostButton.contains(pos){
 			boostWeapon()
-			progressBar.size.width = 1
 			if soundOption == true{
 				self.run(SKAction.playSoundFileNamed("pow", waitForCompletion: false))
 			}
@@ -884,6 +887,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 		self.addAlienTimer.invalidate()
 		//addAlienTimer = nil
 		self.gameTimer.invalidate()
+		self.winTimer.invalidate()
 		//gameTimer = nil
 	}
 	

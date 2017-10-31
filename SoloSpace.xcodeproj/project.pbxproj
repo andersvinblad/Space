@@ -15,9 +15,11 @@
 		AE92C7E01ECD6FE70062330C /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE92C7DF1ECD6FE70062330C /* Settings.swift */; };
 		AE92C7E21ECD71760062330C /* Bombs.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE92C7E11ECD71760062330C /* Bombs.swift */; };
 		AE92C7E41ECD741C0062330C /* BombExplosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = AE92C7E31ECD741C0062330C /* BombExplosion.sks */; };
+		AE9425C51F05741A0017A27C /* Laser_Shoot4.wav in Resources */ = {isa = PBXBuildFile; fileRef = AE9425C41F05741A0017A27C /* Laser_Shoot4.wav */; };
 		AEB367921ED2116D004BA9D1 /* music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AEB367911ED2116D004BA9D1 /* music.mp3 */; };
 		AEB367941ED21724004BA9D1 /* soloSpaceOst.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AEB367931ED21724004BA9D1 /* soloSpaceOst.mp3 */; };
 		AEB367961ED2D3A6004BA9D1 /* GameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB367951ED2D3A6004BA9D1 /* GameData.swift */; };
+		AEB7D2A31FA8D43C00B93A9D /* SoloSpaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB7D2A21FA8D43C00B93A9D /* SoloSpaceTests.swift */; };
 		AEC297801EE5859B004E7D47 /* pew.wav in Resources */ = {isa = PBXBuildFile; fileRef = AEC2977F1EE5859B004E7D47 /* pew.wav */; };
 		AEC297841EE58BD2004E7D47 /* pow.wav in Resources */ = {isa = PBXBuildFile; fileRef = AEC297811EE58BD2004E7D47 /* pow.wav */; };
 		AEC297851EE58BD2004E7D47 /* select.wav in Resources */ = {isa = PBXBuildFile; fileRef = AEC297821EE58BD2004E7D47 /* select.wav */; };
@@ -39,6 +41,16 @@
 		AEF45F761EC4345F00C0D62D /* Aliens.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF45F751EC4345F00C0D62D /* Aliens.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		AEB7D2A51FA8D43C00B93A9D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AEF45F111EBD299300C0D62D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AEF45F181EBD299300C0D62D;
+			remoteInfo = SoloSpace;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		AE92C7A71EC7B51E0062330C /* StartScenen.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = StartScenen.sks; path = SoloSpace/StartScenen.sks; sourceTree = "<group>"; };
 		AE92C7AF1EC8574F0062330C /* Torpedo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Torpedo.swift; path = SoloSpace/Torpedo.swift; sourceTree = "<group>"; };
@@ -48,9 +60,13 @@
 		AE92C7DF1ECD6FE70062330C /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		AE92C7E11ECD71760062330C /* Bombs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bombs.swift; sourceTree = "<group>"; };
 		AE92C7E31ECD741C0062330C /* BombExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BombExplosion.sks; sourceTree = "<group>"; };
+		AE9425C41F05741A0017A27C /* Laser_Shoot4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Laser_Shoot4.wav; sourceTree = "<group>"; };
 		AEB367911ED2116D004BA9D1 /* music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music.mp3; sourceTree = "<group>"; };
 		AEB367931ED21724004BA9D1 /* soloSpaceOst.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = soloSpaceOst.mp3; path = SoloSpace/soloSpaceOst.mp3; sourceTree = "<group>"; };
 		AEB367951ED2D3A6004BA9D1 /* GameData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameData.swift; path = SoloSpace/GameData.swift; sourceTree = "<group>"; };
+		AEB7D2A01FA8D43B00B93A9D /* SoloSpaceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SoloSpaceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AEB7D2A21FA8D43C00B93A9D /* SoloSpaceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoloSpaceTests.swift; sourceTree = "<group>"; };
+		AEB7D2A41FA8D43C00B93A9D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AEC2977F1EE5859B004E7D47 /* pew.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = pew.wav; path = SoloSpace/pew.wav; sourceTree = "<group>"; };
 		AEC297811EE58BD2004E7D47 /* pow.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pow.wav; sourceTree = "<group>"; };
 		AEC297821EE58BD2004E7D47 /* select.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = select.wav; sourceTree = "<group>"; };
@@ -75,6 +91,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		AEB7D29D1FA8D43B00B93A9D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AEF45F161EBD299300C0D62D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -93,6 +116,7 @@
 				AEF45F3C1EBDFECE00C0D62D /* explosion.mp3 */,
 				AEC297811EE58BD2004E7D47 /* pow.wav */,
 				AEC297821EE58BD2004E7D47 /* select.wav */,
+				AE9425C41F05741A0017A27C /* Laser_Shoot4.wav */,
 				AEC297831EE58BD2004E7D47 /* exp.wav */,
 				AEF45F361EBD2A0E00C0D62D /* Explosion.sks */,
 				AEC2977F1EE5859B004E7D47 /* pew.wav */,
@@ -126,6 +150,15 @@
 			name = "Player / Aliens / GameData";
 			sourceTree = "<group>";
 		};
+		AEB7D2A11FA8D43C00B93A9D /* SoloSpaceTests */ = {
+			isa = PBXGroup;
+			children = (
+				AEB7D2A21FA8D43C00B93A9D /* SoloSpaceTests.swift */,
+				AEB7D2A41FA8D43C00B93A9D /* Info.plist */,
+			);
+			path = SoloSpaceTests;
+			sourceTree = "<group>";
+		};
 		AEC297731EE54232004E7D47 /* Never pressed */ = {
 			isa = PBXGroup;
 			children = (
@@ -147,6 +180,7 @@
 				AEF45F1B1EBD299300C0D62D /* SoloSpace */,
 				AE92C7DB1ECD6E620062330C /* Pickups/items */,
 				AE92C7B71EC995170062330C /* Assets and Effects */,
+				AEB7D2A11FA8D43C00B93A9D /* SoloSpaceTests */,
 				AEF45F1A1EBD299300C0D62D /* Products */,
 				AEC297731EE54232004E7D47 /* Never pressed */,
 			);
@@ -156,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				AEF45F191EBD299300C0D62D /* SoloSpace.app */,
+				AEB7D2A01FA8D43B00B93A9D /* SoloSpaceTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -174,6 +209,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		AEB7D29F1FA8D43B00B93A9D /* SoloSpaceTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AEB7D2A91FA8D43C00B93A9D /* Build configuration list for PBXNativeTarget "SoloSpaceTests" */;
+			buildPhases = (
+				AEB7D29C1FA8D43B00B93A9D /* Sources */,
+				AEB7D29D1FA8D43B00B93A9D /* Frameworks */,
+				AEB7D29E1FA8D43B00B93A9D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AEB7D2A61FA8D43C00B93A9D /* PBXTargetDependency */,
+			);
+			name = SoloSpaceTests;
+			productName = SoloSpaceTests;
+			productReference = AEB7D2A01FA8D43B00B93A9D /* SoloSpaceTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		AEF45F181EBD299300C0D62D /* SoloSpace */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = AEF45F311EBD299300C0D62D /* Build configuration list for PBXNativeTarget "SoloSpace" */;
@@ -197,10 +250,16 @@
 		AEF45F111EBD299300C0D62D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0830;
+				LastSwiftUpdateCheck = 0900;
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Anders Vinblad";
 				TargetAttributes = {
+					AEB7D29F1FA8D43B00B93A9D = {
+						CreatedOnToolsVersion = 9.0;
+						DevelopmentTeam = YXVAR6P95T;
+						ProvisioningStyle = Automatic;
+						TestTargetID = AEF45F181EBD299300C0D62D;
+					};
 					AEF45F181EBD299300C0D62D = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = YXVAR6P95T;
@@ -222,11 +281,19 @@
 			projectRoot = "";
 			targets = (
 				AEF45F181EBD299300C0D62D /* SoloSpace */,
+				AEB7D29F1FA8D43B00B93A9D /* SoloSpaceTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		AEB7D29E1FA8D43B00B93A9D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AEF45F171EBD299300C0D62D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -234,6 +301,7 @@
 				AEC297841EE58BD2004E7D47 /* pow.wav in Resources */,
 				AEF45F351EBD2A0400C0D62D /* Starfield.sks in Resources */,
 				AEF45F281EBD299300C0D62D /* Main.storyboard in Resources */,
+				AE9425C51F05741A0017A27C /* Laser_Shoot4.wav in Resources */,
 				AEF45F721EC2E9E900C0D62D /* Assets.xcassets in Resources */,
 				AEF45F391EBD2EDF00C0D62D /* Thruster.sks in Resources */,
 				AEF45F1F1EBD299300C0D62D /* GameScene.sks in Resources */,
@@ -256,6 +324,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		AEB7D29C1FA8D43B00B93A9D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AEB7D2A31FA8D43C00B93A9D /* SoloSpaceTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AEF45F151EBD299300C0D62D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -275,6 +351,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AEB7D2A61FA8D43C00B93A9D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AEF45F181EBD299300C0D62D /* SoloSpace */;
+			targetProxy = AEB7D2A51FA8D43C00B93A9D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		AEF45F261EBD299300C0D62D /* Main.storyboard */ = {
@@ -298,6 +382,60 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		AEB7D2A71FA8D43C00B93A9D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = YXVAR6P95T;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = SoloSpaceTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = AV.SoloSpaceTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SoloSpace.app/SoloSpace";
+			};
+			name = Debug;
+		};
+		AEB7D2A81FA8D43C00B93A9D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = YXVAR6P95T;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = SoloSpaceTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = AV.SoloSpaceTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SoloSpace.app/SoloSpace";
+			};
+			name = Release;
+		};
 		AEF45F2F1EBD299300C0D62D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -424,6 +562,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		AEB7D2A91FA8D43C00B93A9D /* Build configuration list for PBXNativeTarget "SoloSpaceTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AEB7D2A71FA8D43C00B93A9D /* Debug */,
+				AEB7D2A81FA8D43C00B93A9D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		AEF45F141EBD299300C0D62D /* Build configuration list for PBXProject "SoloSpace" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

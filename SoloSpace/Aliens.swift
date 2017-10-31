@@ -36,7 +36,7 @@ class Aliens: SKSpriteNode {
         stringName = bigAlien
         let texture = SKTexture(imageNamed: bigAlien)
         super.init(texture:texture, color: SKColor.clear, size: texture.size())
-        hp = Int((GameData.shared.difficulty / 3) * Double(10))
+        hp = Int((GameData.shared.difficulty / 3) * Double(35))
     }
     
     required init?(coder aDecoder: NSCoder) {

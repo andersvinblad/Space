@@ -71,7 +71,7 @@ class StartScene: SKScene {
 		if (highScoreLabel != nil){
 			highScoreLabel.removeFromParent()
 		}
-		self.run(SKAction.wait(forDuration: 0.5)){
+		self.run(SKAction.wait(forDuration: 0.15)){
 		//gameData.saveData()
 		self.hasPickedLevel = false
 		self.gameData.loadData()
@@ -125,7 +125,7 @@ class StartScene: SKScene {
 		self.highScoreLabel.fontColor = UIColor.white
 		self.highScoreLabel.run(repeatPulse)
 		
-		self.pointsNeeded = SKLabelNode(text: "Points needed: " + String(Int64(50 / self.gameData.attackRate)))
+		self.pointsNeeded = SKLabelNode(text: "Points needed: " + String(Int64(1250 / self.gameData.attackRate)))
 		self.pointsNeeded.position = CGPoint(x:0, y: 400)
 		self.pointsNeeded.fontName = "AmericanTypewriter-Bold"
 		self.pointsNeeded.fontSize = 30
@@ -162,7 +162,7 @@ class StartScene: SKScene {
     }
 	
     func levelSelect(){
-		self.run(SKAction.wait(forDuration: 0.5)){
+		self.run(SKAction.wait(forDuration: 0.15)){
         self.removeChildren(in: self.menuItems)
         self.highScoreLabel.removeFromParent()
 		self.pointsNeeded.removeFromParent()
@@ -213,7 +213,7 @@ class StartScene: SKScene {
 	
 	
 	func loadoutMenu(){
-		self.run(SKAction.wait(forDuration: 0.5)){
+		self.run(SKAction.wait(forDuration: 0.15)){
 
 		self.highScoreLabel.removeFromParent()
 		self.pointsNeeded.removeFromParent()
@@ -310,7 +310,7 @@ class StartScene: SKScene {
 		}
 	}
 	func shipSelect(){
-		self.run(SKAction.wait(forDuration: 0.5)){
+		self.run(SKAction.wait(forDuration: 0.15)){
 			self.highScoreLabel.removeFromParent()
 			self.pointsNeeded.removeFromParent()
 			//self.removeChildren(in: self.menuItems)
@@ -438,15 +438,15 @@ class StartScene: SKScene {
 			}
 			
 			if (menuItems[3].contains(pos)){ //UPGRADE
-				if gameData.score >= Int64(50 / gameData.attackRate){
-					self.gameData.score -= Int64(50 / gameData.attackRate)
-					self.gameData.attackRate = gameData.attackRate/1.2
+				if gameData.score >= Int64(1250 / gameData.attackRate){
+					self.gameData.score -= Int64(1250 / gameData.attackRate)
+					self.gameData.attackRate = gameData.attackRate/1.1
 					self.gameData.saveData()
 				}
 				self.highScoreLabel.removeFromParent()
 				self.pointsNeeded.removeFromParent()
 				self.highScoreLabel.text = "Points: " + String(gameData.score)
-				self.pointsNeeded.text = "Points needed: " + String(Int64(50 / self.gameData.attackRate))
+				self.pointsNeeded.text = "Points needed: " + String(Int64(1250 / self.gameData.attackRate))
 				self.run(SKAction.playSoundFileNamed("select.wav", waitForCompletion: true))
 				self.highScoreLabel.removeFromParent()
 				self.pointsNeeded.removeFromParent()
