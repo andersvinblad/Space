@@ -24,6 +24,7 @@
 		AEC297841EE58BD2004E7D47 /* pow.wav in Resources */ = {isa = PBXBuildFile; fileRef = AEC297811EE58BD2004E7D47 /* pow.wav */; };
 		AEC297851EE58BD2004E7D47 /* select.wav in Resources */ = {isa = PBXBuildFile; fileRef = AEC297821EE58BD2004E7D47 /* select.wav */; };
 		AEC297861EE58BD2004E7D47 /* exp.wav in Resources */ = {isa = PBXBuildFile; fileRef = AEC297831EE58BD2004E7D47 /* exp.wav */; };
+		AEDAE3271FB066D700590489 /* Aliens.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF45F751EC4345F00C0D62D /* Aliens.swift */; };
 		AEF45F1D1EBD299300C0D62D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF45F1C1EBD299300C0D62D /* AppDelegate.swift */; };
 		AEF45F1F1EBD299300C0D62D /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = AEF45F1E1EBD299300C0D62D /* GameScene.sks */; };
 		AEF45F211EBD299300C0D62D /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = AEF45F201EBD299300C0D62D /* Actions.sks */; };
@@ -141,11 +142,11 @@
 		AE92C7DC1ECD6E870062330C /* Player / Aliens / GameData */ = {
 			isa = PBXGroup;
 			children = (
-				AEF45F751EC4345F00C0D62D /* Aliens.swift */,
 				AE92C7DD1ECD6EE10062330C /* Player.swift */,
 				AE92C7DF1ECD6FE70062330C /* Settings.swift */,
 				AE92C7AF1EC8574F0062330C /* Torpedo.swift */,
 				AEB367951ED2D3A6004BA9D1 /* GameData.swift */,
+				AEF45F751EC4345F00C0D62D /* Aliens.swift */,
 			);
 			name = "Player / Aliens / GameData";
 			sourceTree = "<group>";
@@ -329,6 +330,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEB7D2A31FA8D43C00B93A9D /* SoloSpaceTests.swift in Sources */,
+				AEDAE3271FB066D700590489 /* Aliens.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

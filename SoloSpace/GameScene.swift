@@ -274,7 +274,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 			self.alienQueue -= 1
 			self.currentNrOfAliens += 1
 			
-			let alien = Aliens.init(normalAlien: "alien")
+			let alien = Aliens.init(normalAlien: "alien", difficulty: gameData.difficulty)
 			let randomAlienPosition = GKRandomDistribution(lowestValue: (Int(-self.frame.width/2) + 50), highestValue: Int( self.frame.width/2) - 50)
 			let position = CGFloat(randomAlienPosition.nextInt())
 			
@@ -315,7 +315,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 		if bigAlienIsAdded != true{
 			
 			bigAlienIsAdded = true
-			let alien = Aliens.init(bigAlien: "BigB")
+			let alien = Aliens.init(bigAlien: "BigB", difficulty: gameData.difficulty )
 			let randomAlienPosition = GKRandomDistribution(lowestValue: (Int(-self.frame.width/2) + 50), highestValue: Int( self.frame.width/2) - 50)
 			let position = CGFloat(randomAlienPosition.nextInt())
 			
