@@ -16,14 +16,9 @@ class Player: SKSpriteNode {
     var nrOfBombs = 3
     var imageName = "pixelShip"
     var currentWeapon = "laser"
-
-
-    
-    
     
     init(playerImageName:String, weaponName: String){
         //textures
-        
         stringName = playerImageName
         let texture = SKTexture(imageNamed: playerImageName)
         super.init(texture:texture, color: SKColor.clear, size: texture.size())
@@ -31,7 +26,6 @@ class Player: SKSpriteNode {
         hp = 3
         
     }
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

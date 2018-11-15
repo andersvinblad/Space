@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SoloSpace/GameScene.swift"
-            timestampString = "535455374.262041"
+            timestampString = "563986436.8912669"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "895"
-            endingLineNumber = "895">
+            startingLineNumber = "892"
+            endingLineNumber = "892">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

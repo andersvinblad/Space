@@ -21,8 +21,7 @@ class StartGameViewController: UIViewController {
             
             // Get the SKScene from the loaded GKScene
             if let sceneNode = scene.rootNode as! StartScene? {
-                
-                // Copy gameplay related content over to the scene
+			// Copy gameplay related content over to the scene
              //   sceneNode.entities = scene.entities
              //   sceneNode.graphs = scene.graphs
                 

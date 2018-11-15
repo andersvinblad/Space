@@ -13,7 +13,6 @@ import GameplayKit
 class Aliens: SKSpriteNode {
     var stringName:String?
     var hp:Int?
-    //var intSpeed = 10
     var imageName:String?
     var actionArray = [SKAction]()
     

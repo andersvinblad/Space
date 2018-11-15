@@ -65,8 +65,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 	let playerCategoryBitMask:UInt32    = 0x1 << 5
 	let pickUpCategoryBitMask:UInt32    = 0x1 << 6
 	
-	
-	
 	override func sceneDidLoad() {
 		print("sceneDidLoad")
 		
@@ -76,7 +74,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 		}
 	}
 	func startGame(attackRate: Double){
-		
 		self.alienQueue = 5
 		var difficulty = gameData.difficulty
 		//startMusic()
@@ -156,38 +153,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 		bottomArea.physicsBody?.collisionBitMask = 0
 		bottomArea.physicsBody?.usesPreciseCollisionDetection = true
 		
-		
-		
-		
 		self.addChild(bottomArea)
 		self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
 		self.physicsWorld.contactDelegate = self
 		
 		// ADD INITIAL ALIENS
 		
-		
-		
-		
-		
-		
-		
-		
-		//gameTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(addBigAlien), userInfo: nil, repeats: true)
-		
 		self.run(SKAction.wait(forDuration: 1)){
 			self.addAlienTimer = Timer.scheduledTimer(timeInterval: (TimeInterval(8.0 / Double(self.gameData.difficulty * 3))), target: self, selector: #selector(self.addAlien), userInfo: nil, repeats: true)
 			
 		}
-		
 		gameTimer = Timer.scheduledTimer(timeInterval: gameData.attackRate, target: self, selector: #selector(fireTorpedo), userInfo: nil, repeats: true)
 		
-		//gameTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(addPickUp), userInfo: nil, repeats: true)
-		
-		//gameTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(fireTorpedo), userInfo: nil, repeats: true)
-		
 		winTimer = Timer.scheduledTimer(timeInterval: 42, target: self, selector: #selector(winScreen), userInfo: nil, repeats: false)
-		
-		
 		self.progressBar = SKSpriteNode(color: UIColor.yellow, size: CGSize(width: 1, height: 20))
 		self.progressBar.position = CGPoint(x: 0, y: self.frame.height/2 - 50)
 		self.addChild(progressBar)
@@ -195,12 +173,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 		progressBarFrame.position = progressBar.position
 		progressBarFrame.fillColor = UIColor.clear
 		progressBarFrame.strokeColor = UIColor.cyan
-		
 		self.addChild(progressBarFrame)
-		
-		// gameTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(progress), userInfo: nil, repeats: true)
-		
-		
 	}
 	func progress(){
 		if (progressBar.size.width <= progressBarFrame.frame.width){
@@ -218,12 +191,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 		spaceship.physicsBody?.contactTestBitMask = pickUpCategoryBitMask
 		spaceship.position = CGPoint(x: spaceship.size.width/4, y: 0)
 		
-		
 		weaponSprite1 = SKSpriteNode(imageNamed: gameData.currentWeapon)
 		weaponSprite2 = SKSpriteNode(imageNamed: gameData.currentWeapon)
-		
-		
-		
 		
 		weaponSprite1.position = CGPoint(x: spaceship.size.width/4, y: 0)
 		weaponSprite2.position = CGPoint(x: -spaceship.size.width/4, y: 0)
@@ -233,12 +202,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 		spaceship.addChild(weapons[0])
 		spaceship.addChild(weapons[1])
 		
-		
 		thruster = SKEmitterNode(fileNamed: "Thruster")
 		thruster.position = CGPoint(x: 0, y: 0 - 40)
 		spaceship.addChild(thruster)
-		
-		
 	}
 	func fireBomb(){
 		spaceship.nrOfBombs -= 1

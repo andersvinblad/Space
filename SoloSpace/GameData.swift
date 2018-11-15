@@ -20,8 +20,6 @@ class GameData {
     var shipName = "playerRed"
 	
     //private init() { }
-    
-    
 	func loadData(){
 		
 		let arr = defaults.object(forKey:"SavedArray") as? [String] ?? [String]()

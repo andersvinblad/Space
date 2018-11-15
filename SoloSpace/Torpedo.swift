@@ -16,9 +16,7 @@ class Torpedo: SKSpriteNode {
     var intSpeed:Int?
     var imageName:String?
     var actionArray = [SKAction]()
-    
-    
-    
+
     init(weaponType:String){
         //textures
         hp = 1

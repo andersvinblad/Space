@@ -21,7 +21,6 @@ class Bomb: SKSpriteNode {
         var texture = SKTexture(imageNamed: type)
         stringName = type
         super.init(texture:texture, color: SKColor.clear, size: texture.size())
-        //MISC
     }
     
     required init?(coder aDecoder: NSCoder) {

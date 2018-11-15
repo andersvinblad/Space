@@ -46,7 +46,6 @@ class StartScene: SKScene {
 
     override func sceneDidLoad() {
         if (started == false){
-			
         startMenu()
         starField = SKEmitterNode(fileNamed: "Starfield")
         starField.position = CGPoint(x: 0, y: 1400)

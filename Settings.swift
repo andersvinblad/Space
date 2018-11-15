@@ -13,6 +13,4 @@ class Settings{
     var gameMode = 1
     var playerSprite = "playerTestSprite"
     var currentWeapon = "weapon"
-    
-    
 }
